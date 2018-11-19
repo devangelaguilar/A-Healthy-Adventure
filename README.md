@@ -1,1 +1,1 @@
-# A Healthy Adventure, the adventure you are waiting for.
+# A Healthy Adventure.
