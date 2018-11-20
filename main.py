@@ -181,10 +181,14 @@ class Depression_Level:
         #self.text = self.lov[0]
         for row, tiles in enumerate(self.map.data):
             for col, tile in enumerate(tiles):
+                if tile == '0':
+                    Floor(self,col,row)
                 if tile == '1':
-                    Wall(self, col, row)
+                    Floor_Depression(self, col, row)
                 if tile == '2':
-                    Floor(self, col, row)
+                    Floor_Depression_1(self, col, row)
+                if tile == '6':
+                    Floor_Depression_2(self,col,row)
                 if tile == '3':
                     Pow_Life(self,col,row)
                 if tile == '4':
@@ -205,7 +209,6 @@ class Depression_Level:
         #Loop Principal.
         pg.mixer.music.play(loops=-1)
         self.playing = True
-        self.screen.blit(self.background,(0,0))
         while self.playing:
             self.clock.tick(FPS)
             self.events_depression()
@@ -278,6 +281,8 @@ class Depression_Level:
 
     def draw_depression(self):
         #Dibujar pantalla durante el loop.
+        self.screen.fill(colors.WHITE)
+        self.screen.blit(self.background, (0,0))
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    

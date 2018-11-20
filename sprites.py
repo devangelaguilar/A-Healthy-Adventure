@@ -59,10 +59,10 @@ class Joseph(pg.sprite.Sprite):
         for frame in self.standing_frames:
             frame.set_colorkey(colors.BLACK)
 
-        self.walking_frames_r = [self.game.spritesheet.get_image(0,64,64,64),
-                        self.game.spritesheet.get_image(64,64,64,64),
+        self.walking_frames_r = [self.game.spritesheet.get_image(64,64,64,64),
                         self.game.spritesheet.get_image(128,64,64,64),
-                        self.game.spritesheet.get_image(192,64,64,64)]
+                        self.game.spritesheet.get_image(192,64,64,64),
+                        self.game.spritesheet.get_image(0,128,64,64)]
         
         self.walking_frames_l = []
         for frame in self.walking_frames_r:
@@ -350,12 +350,44 @@ class Map:
         self.width = self.tilewidth * TILESIZE
         self.height = self.tileheight * TILESIZE
 
-class Wall(pg.sprite.Sprite):
+class Floor_Depression(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.walls
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pg.image.load("img/Depression/piso_test.png").convert_alpha()
+        self.image = pg.image.load("img/Depression/platform.png").convert_alpha()
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+        #if randrange(5) < POW_SPAWN_PCT:
+            #Pow_Pizza(self.game, self)
+        #if randrange(20) < POW_SPAWN_PCT:
+            #Pow_Life(self.game,self)
+
+class Floor_Depression_1(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.walls
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = pg.image.load("img/Depression/platform2.png").convert_alpha()
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+        #if randrange(5) < POW_SPAWN_PCT:
+            #Pow_Pizza(self.game, self)
+        #if randrange(20) < POW_SPAWN_PCT:
+            #Pow_Life(self.game,self)
+
+class Floor_Depression_2(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.walls
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = pg.image.load("img/Depression/platform3.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
