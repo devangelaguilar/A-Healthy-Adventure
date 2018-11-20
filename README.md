@@ -6,4 +6,4 @@
 - Guillermo Villegas "Documentation Leader"
 - Sergio Adrian "Testing Leader"
 
-## by Milledo Dogio :copyright:
+## by Milledo Dogio
