@@ -1,2 +1,2 @@
-#   A Healthy Adventure.
-# by Milledo Dogio
+# A Healthy Adventure. :video_game:
+by Milledo Dogio
