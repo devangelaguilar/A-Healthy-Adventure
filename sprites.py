@@ -7,8 +7,6 @@ vec = pg.math.Vector2
 class Spritesheet:
     def __init__(self, filename):
         self.spritesheet = pg.image.load(filename).convert_alpha()
-        self.heart_anim = pg.image.load(filename).convert_alpha()
-        self.heart_ly_anim = pg.image.load(filename).convert_alpha()
     
     def get_image(self,x,y,width,height):
         image = pg.Surface((width,height))
@@ -17,22 +15,22 @@ class Spritesheet:
     
     def get_image_heart(self,x,y,width,height):
         image = pg.Surface((width,height))
-        image.blit(self.heart_anim,(0,0),(x,y,width,height))
+        image.blit(self.spritesheet,(0,0),(x,y,width,height))
         return image
     
     def get_image_heart_ly(self,x,y,width,height):
         image = pg.Surface((width,height))
-        image.blit(self.heart_ly_anim,(0,0),(x,y,width,height))
+        image.blit(self.spritesheet,(0,0),(x,y,width,height))
         return image
 
     def get_breath_drugs(self,x,y,width,height):
         image = pg.Surface((width,height))
-        image.blit(self.heart_anim,(0,0),(x,y,width,height))
+        image.blit(self.spritesheet,(0,0),(x,y,width,height))
         return image
 
     def get_walk_drugs(self,x,y,width,height):
         image = pg.Surface((width,height))
-        image.blit(self.heart_anim,(0,0),(x,y,width,height))
+        image.blit(self.spritesheet,(0,0),(x,y,width,height))
         return image
     
 class Joseph(pg.sprite.Sprite):
@@ -357,7 +355,7 @@ class Wall(pg.sprite.Sprite):
         self.groups = game.all_sprites, game.walls
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pg.image.load("img/piso_test.png").convert_alpha()
+        self.image = pg.image.load("img/Depression/piso_test.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y

@@ -27,7 +27,7 @@ PLAYER_IMG = 'player.png'
 PLAYER_HIT_RECT = pg.Rect(0, 0, 10, 10)
 POW_SPAWN_PCT = 1
 
-SPRITESHEET = 'joseph.png'
+JOSEPH_SPRITESHEET = 'Joseph_Spritesheet.png'
 BREATH_DRUGS = 'Breath_Drugs.png'
 WALK_DRUGS = 'Walk_Drugs.png'
 HEART_ANIM = 'heart_anim.png'

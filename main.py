@@ -7,11 +7,11 @@ import colors
 from random import randrange
 import datetime
 
-opciones = ['Play',
-            'Options',
-            'Credits',
-            'Exit',
-            'Depression',
+opciones = ['Jugar',
+            'Opciones',
+            'Creditos',
+            'Salir']
+niveles = ['Depression',
             'Drugs',
             'Food Disorders',
             'Obesity',
@@ -154,17 +154,17 @@ class Depression_Level:
     def load_data_depression(self):
         self.dir = os.path.dirname(__file__)
         game_folder = os.path.dirname(__file__)
-        img_folder = os.path.join(game_folder,'img')
+        img_folder = os.path.join(game_folder,'img/Depression')
         with open(os.path.join(self.dir, HS_FILE), 'r') as f:
             try:
                 self.highscore = int(f.read())
             except:
                 self.highscore = 0
         self.map = Map(os.path.join(game_folder,'maps/Depression - map_1.txt'))
-        self.player_img = pg.image.load(os.path.join(img_folder,PLAYER_IMG)).convert_alpha()
-        self.spritesheet = Spritesheet(os.path.join(img_folder,SPRITESHEET))
+        self.spritesheet = Spritesheet(os.path.join(img_folder,JOSEPH_SPRITESHEET))
         self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
+        self.background = pg.image.load("img/Depression/Scenario.png")
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -205,6 +205,7 @@ class Depression_Level:
         #Loop Principal.
         pg.mixer.music.play(loops=-1)
         self.playing = True
+        self.screen.blit(self.background,(0,0))
         while self.playing:
             self.clock.tick(FPS)
             self.events_depression()
@@ -277,7 +278,6 @@ class Depression_Level:
 
     def draw_depression(self):
         #Dibujar pantalla durante el loop.
-        self.screen.fill(colors.Material.BLUE_GREY300)
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
@@ -515,11 +515,11 @@ def depression():
 def select_level():
     if __name__ == '__main__':
         salir = False
-        opcion = [(opciones[4], depression),
-                    (opciones[5], drugs),
-                    (opciones[6], food_disorders),
-                    (opciones[7], obesity),
-                    (opciones[8],main_menu)]
+        opcion = [(niveles[0], depression),
+                    (niveles[1], drugs),
+                    (niveles[2], food_disorders),
+                    (niveles[3], obesity),
+                    (niveles[4],main_menu)]
 
 
     pg.font.init()
