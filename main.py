@@ -11,11 +11,11 @@ opciones = ['Jugar',
             'Opciones',
             'Creditos',
             'Salir']
-niveles = ['Depression',
-            'Drugs',
-            'Food Disorders',
-            'Obesity',
-            'Back To Main Menu']
+niveles = ['Depresion',
+            'Drogas',
+            'Desordenes Alimenticios',
+            'Obesidad',
+            'Regresar al menu principal']
 
 class Opcion:
 
@@ -75,16 +75,16 @@ class Menu:
     def __init__(self, opciones,text_color):
         self.opciones = []
         pg.display.set_caption(TITLE)
-        fuente = pg.font.Font('Joystix.ttf', 20)
+        fuente = pg.font.Font('Joystix.ttf', 30)
         x = WIDTH / 5 * 2
         y = HEIGHT / 2
         niidea = 1
 
-        self.cursor = Cursor(x - 40, y, 30)
+        self.cursor = Cursor(x - 40, y, 60)
 
         for titulo, funcion in opciones:
             self.opciones.append(Opcion(fuente,text_color, titulo, x, y, niidea, funcion))
-            y += 30
+            y += 60
             if niidea == 1:
                 niidea = -1
             else:
@@ -218,6 +218,8 @@ class Depression_Level:
 
     def update_depression(self):
         #Update para el loop.
+        self.screen.fill(colors.WHITE)
+        self.screen.blit(self.background, (0,0))
         self.all_sprites.update()
         self.powerups.update()
         if self.player.vel.y > 0:
@@ -281,8 +283,6 @@ class Depression_Level:
 
     def draw_depression(self):
         #Dibujar pantalla durante el loop.
-        self.screen.fill(colors.WHITE)
-        self.screen.blit(self.background, (0,0))
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
@@ -485,12 +485,15 @@ class Drugs_level:
         pass
 
     def show_start_screen(self):
-        pass
+        self.milledo_dogio = pg.image.load("img/logo_1.png")
+        self.screen.blit(self.milledo_dogio,(0,0))
+        time.delay(1000)
 
 
     def show_go_screen(self):
         #Muestra la pantalla de game over. 
         pass
+
 
     def draw_text(self, font_name,text, size, color, x, y):
         font = pg.font.Font(font_name, size)
