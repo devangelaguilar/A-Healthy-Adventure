@@ -5,7 +5,8 @@ TITLE = "A Healthy Adventure - Vesion: Alpha 0.6 - Milledo Dogio"
 PLAYER_ACC = 0.6
 PLAYER_FRICTION = -0.14
 PLAYER_GRAV = 0.8
-PLAYER_JUMP = 22
+PLAYER_JUMP = 20
+PLAYER_MAR_JUMP = 20
 FONT_NAME = 'joystix'
 HS_FILE = "highscore.txt"
 FPS = 60
@@ -28,6 +29,7 @@ PLAYER_HIT_RECT = pg.Rect(0, 0, 10, 10)
 POW_SPAWN_PCT = 1
 
 JOSEPH_SPRITESHEET = 'Joseph_Spritesheet.png'
+MARIANA_SPRITESHEET = 'Mariana_Anorexia.png'
 BREATH_DRUGS = 'Breath_Drugs.png'
 WALK_DRUGS = 'Walk_Drugs.png'
 HEART_ANIM = 'heart_anim.png'

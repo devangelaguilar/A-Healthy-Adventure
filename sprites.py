@@ -106,6 +106,147 @@ class Joseph(pg.sprite.Sprite):
         self.acc = vec(0,PLAYER_GRAV)
         keys = pg.key.get_pressed()
 
+        if keys[pg.K_LEFT] or keys[pg.K_a]:
+            self.acc.x = -PLAYER_ACC
+        if keys[pg.K_RIGHT] or keys[pg.K_d]:
+            self.acc.x = PLAYER_ACC
+        if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
+            self.jump()
+
+        self.acc.x += self.vel.x * PLAYER_FRICTION
+        #Ecuaciones de Motricidad
+        self.vel += self.acc
+        if abs(self.vel.x) < 0.1:
+            self.vel.x = 0
+        self.pos += self.vel + 0.5 * self.acc
+        # Se transporta al otro lado de la pantalla(Es bug, si, lo se)
+        #if self.pos.x > self.game.map.width + self.rect.width / 2:
+            #self.pos.x = 0 - self.rect.width / 2
+        #if self.pos.x < 0 - self.rect.width / 2:
+            #self.pos.x = self.game.map.width + self.rect.width / 2
+
+        self.rect.midbottom = self.pos
+    
+    def animate(self):
+        now = pg.time.get_ticks()
+        if self.vel.x != 0:
+            self.walking = True
+
+        else:
+            self.walking = False
+        
+        # show walk animation
+        if self.walking:
+            if now - self.last_update > 180:
+                self.last_update = now
+                self.current_frame = (self.current_frame + 1) % len(self.walking_frames_l)
+                bottom = self.rect.bottom
+                if self.vel.x > 0:
+                    self.image = self.walking_frames_r[self.current_frame]
+                else:
+                    self.image = self.walking_frames_l[self.current_frame]
+                self.rect = self.image.get_rect()
+                self.rect.bottom = bottom
+            
+        # show jump animation
+        if self.jumping:
+            if now - self.last_update > 180:
+                self.last_update = now
+                self.current_frame = (self.current_frame + 1) % len(self.jumping_frames)
+                bottom = self.rect.bottom
+                if self.vel.y > 0:
+                    self.image = self.jumping_frames[self.current_frame]
+                else:
+                    self.jumping = False
+                self.image.set_colorkey(colors.BLACK)
+                self.rect = self.image.get_rect()
+                self.rect.bottom = bottom
+
+        # show idle animation
+        if not self.jumping and not self.walking:
+            if now - self.last_update > 350:
+                self.last_update = now
+                self.current_frame = (self.current_frame + 1) % len(self.standing_frames)
+                bottom = self.rect.bottom
+                self.image = self.standing_frames[self.current_frame]
+                self.rect = self.image.get_rect()
+                self.rect.bottom = bottom
+        
+class Jon_Snow(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.walking = False
+        self.jumping = False
+        self.current_frame = 0
+        self.last_update = 0
+        self.load_images()
+        self.image = self.standing_frames[0]
+        self.rect = self.image.get_rect()
+        self.hit_rect = PLAYER_HIT_RECT
+        self.hit_rect.center = self.rect.center
+        self.vel = vec(0, 0)
+        self.pos = vec(x, y) * TILESIZE
+        self.rot = 0
+
+    def load_images(self):
+        self.standing_frames = [self.game.breath_player.get_breath_drugs(0,0,64,64),
+                        self.game.breath_player.get_breath_drugs(64,0,64,64),
+                        self.game.breath_player.get_breath_drugs(0,64,64,64),
+                        self.game.breath_player.get_breath_drugs(64,64,64,64)]
+        for frame in self.standing_frames:
+            frame.set_colorkey(colors.BLACK)
+
+        self.walking_frames_r = [self.game.walk_player.get_walk_drugs(0,0,64,64),
+                        self.game.walk_player.get_walk_drugs(64,0,64,64),
+                        self.game.walk_player.get_walk_drugs(0,64,64,64),
+                        self.game.walk_player.get_walk_drugs(64,64,64,64),
+                        self.game.walk_player.get_walk_drugs(0,128,64,64),
+                        self.game.walk_player.get_walk_drugs(64,128,64,64)]
+        
+        self.walking_frames_l = []
+        for frame in self.walking_frames_r:
+            frame.set_colorkey(colors.BLACK)
+            self.walking_frames_l.append(pg.transform.flip(frame,True,False))
+
+        #self.jumping_frames = [self.game.spritesheet.get_image(0,128,64,64),
+         #               self.game.spritesheet.get_image(64,128,64,64),
+          #              self.game.spritesheet.get_image(128,128,64,64),
+           #             self.game.spritesheet.get_image(192,128,64,64)]
+
+    def jump(self):
+        self.rect.y += 1
+        hits = pg.sprite.spritecollide(self,self.game.walls,False)
+        self.rect.y -= 1
+        if hits:
+            self.vel.y = -PLAYER_JUMP
+    
+    def collide_with_walls(self, dir):
+        if dir == 'x':
+            hits = pg.sprite.spritecollide(self, self.game.walls, False, collide_hit_rect)
+            if hits:
+                if self.vel.x > 0:
+                    self.pos.x = hits[0].rect.left - self.hit_rect.width / 2.0
+                if self.vel.x < 0:
+                    self.pos.x = hits[0].rect.right + self.hit_rect.width / 2.0
+                self.vel.x = 0
+                self.hit_rect.centerx = self.pos.x
+        if dir == 'y':
+            hits = pg.sprite.spritecollide(self, self.game.walls, False, collide_hit_rect)
+            if hits:
+                if self.vel.y > 0:
+                    self.pos.y = hits[0].rect.top - self.hit_rect.height / 2.0
+                if self.vel.y < 0:
+                    self.pos.y = hits[0].rect.bottom + self.hit_rect.height / 2.0
+                self.vel.y = 0
+                self.hit_rect.centery = self.pos.y
+
+    def update(self):
+        self.animate()
+        self.acc = vec(0,PLAYER_GRAV)
+        keys = pg.key.get_pressed()
+
         if keys[pg.K_LEFT]:
             self.acc.x = -PLAYER_ACC
         if keys[pg.K_RIGHT]:
@@ -170,7 +311,7 @@ class Joseph(pg.sprite.Sprite):
                 self.rect = self.image.get_rect()
                 self.rect.bottom = bottom
         
-class Drugs(pg.sprite.Sprite):
+class Mariana(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
@@ -189,10 +330,151 @@ class Drugs(pg.sprite.Sprite):
         self.rot = 0
 
     def load_images(self):
-        self.standing_frames = [self.game.breath_player.get_breath_drugs(0,0,64,64),
-                        self.game.breath_player.get_breath_drugs(64,0,64,64),
-                        self.game.breath_player.get_breath_drugs(0,64,64,64),
-                        self.game.breath_player.get_breath_drugs(64,64,64,64)]
+        self.standing_frames = [self.game.spritesheet_mariana.get_image(0,0,48,64),
+                        self.game.spritesheet_mariana.get_image(48,0,48,64),
+                        self.game.spritesheet_mariana.get_image(96,0,48,64),
+                        self.game.spritesheet_mariana.get_image(144,0,48,64)]
+        for frame in self.standing_frames:
+            frame.set_colorkey(colors.BLACK)
+
+        self.walking_frames_r = [self.game.spritesheet_mariana.get_image(192,0,48,64),
+                        self.game.spritesheet_mariana.get_image(0,64,48,64),
+                        self.game.spritesheet_mariana.get_image(48,64,48,64),
+                        self.game.spritesheet_mariana.get_image(96,64,48,64),
+                        self.game.spritesheet_mariana.get_image(144,64,48,64),
+                        self.game.spritesheet_mariana.get_image(192,64,48,64)]
+        
+        self.walking_frames_l = []
+        for frame in self.walking_frames_r:
+            frame.set_colorkey(colors.BLACK)
+            self.walking_frames_l.append(pg.transform.flip(frame,True,False))
+
+        #self.jumping_frames = [self.game.spritesheet.get_image(0,128,64,64),
+         #               self.game.spritesheet.get_image(64,128,64,64),
+          #              self.game.spritesheet.get_image(128,128,64,64),
+           #             self.game.spritesheet.get_image(192,128,64,64)]
+
+    def jump(self):
+        self.rect.y += 1
+        hits = pg.sprite.spritecollide(self,self.game.walls,False)
+        self.rect.y -= 1
+        if hits:
+            self.vel.y = -PLAYER_MAR_JUMP
+    
+    def collide_with_walls(self, dir):
+        if dir == 'x':
+            hits = pg.sprite.spritecollide(self, self.game.walls, False, collide_hit_rect)
+            if hits:
+                if self.vel.x > 0:
+                    self.pos.x = hits[0].rect.left - self.hit_rect.width / 2.0
+                if self.vel.x < 0:
+                    self.pos.x = hits[0].rect.right + self.hit_rect.width / 2.0
+                self.vel.x = 0
+                self.hit_rect.centerx = self.pos.x
+        if dir == 'y':
+            hits = pg.sprite.spritecollide(self, self.game.walls, False, collide_hit_rect)
+            if hits:
+                if self.vel.y > 0:
+                    self.pos.y = hits[0].rect.top - self.hit_rect.height / 2.0
+                if self.vel.y < 0:
+                    self.pos.y = hits[0].rect.bottom + self.hit_rect.height / 2.0
+                self.vel.y = 0
+                self.hit_rect.centery = self.pos.y
+
+    def update(self):
+        self.animate()
+        self.acc = vec(0,PLAYER_GRAV)
+        keys = pg.key.get_pressed()
+
+        if keys[pg.K_LEFT]:
+            self.acc.x = -PLAYER_ACC
+        if keys[pg.K_RIGHT]:
+            self.acc.x = PLAYER_ACC
+        if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
+            self.jump()
+
+        self.acc.x += self.vel.x * PLAYER_FRICTION
+        #Ecuaciones de Motricidad
+        self.vel += self.acc
+        if abs(self.vel.x) < 0.1:
+            self.vel.x = 0
+        self.pos += self.vel + 0.5 * self.acc
+        # Se transporta al otro lado de la pantalla(Es bug, si, lo se)
+        #if self.pos.x > self.game.map.width + self.rect.width / 2:
+            #self.pos.x = 0 - self.rect.width / 2
+        #if self.pos.x < 0 - self.rect.width / 2:
+            #self.pos.x = self.game.map.width + self.rect.width / 2
+
+        self.rect.midbottom = self.pos
+    
+    def animate(self):
+        now = pg.time.get_ticks()
+        if self.vel.x != 0:
+            self.walking = True
+
+        else:
+            self.walking = False
+        
+        # show walk animation
+        if self.walking:
+            if now - self.last_update > 180:
+                self.last_update = now
+                self.current_frame = (self.current_frame + 1) % len(self.walking_frames_l)
+                bottom = self.rect.bottom
+                if self.vel.x > 0:
+                    self.image = self.walking_frames_r[self.current_frame]
+                else:
+                    self.image = self.walking_frames_l[self.current_frame]
+                self.rect = self.image.get_rect()
+                self.rect.bottom = bottom
+            
+        # show jump animation
+        if self.jumping:
+            if now - self.last_update > 180:
+                self.last_update = now
+                self.current_frame = (self.current_frame + 1) % len(self.jumping_frames)
+                bottom = self.rect.bottom
+                if self.vel.y > 0:
+                    self.image = self.jumping_frames[self.current_frame]
+                else:
+                    self.jumping = False
+                self.image.set_colorkey(colors.BLACK)
+                self.rect = self.image.get_rect()
+                self.rect.bottom = bottom
+
+        # show idle animation
+        if not self.jumping and not self.walking:
+            if now - self.last_update > 350:
+                self.last_update = now
+                self.current_frame = (self.current_frame + 1) % len(self.standing_frames)
+                bottom = self.rect.bottom
+                self.image = self.standing_frames[self.current_frame]
+                self.rect = self.image.get_rect()
+                self.rect.bottom = bottom
+
+class Minion_Depression(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.walking = False
+        self.jumping = False
+        self.current_frame = 0
+        self.last_update = 0
+        self.load_images()
+        self.image = self.standing_frames[0]
+        self.rect = self.image.get_rect()
+        self.hit_rect = PLAYER_HIT_RECT
+        self.hit_rect.center = self.rect.center
+        self.vel = vec(0, 0)
+        self.pos = vec(x, y) * TILESIZE
+        self.rot = 0
+
+    def load_images(self):
+        self.standing_frames = [self.game.spritesheet.get_image(0,0,64,64),
+                        self.game.spritesheet.get_breath_drugs(64,0,64,64),
+                        self.game.breath_player.get_breath_drugs(128,0,64,64),
+                        self.game.breath_player.get_breath_drugs(192,0,64,64)]
         for frame in self.standing_frames:
             frame.set_colorkey(colors.BLACK)
 
@@ -308,8 +590,6 @@ class Drugs(pg.sprite.Sprite):
                 self.image = self.standing_frames[self.current_frame]
                 self.rect = self.image.get_rect()
                 self.rect.bottom = bottom
-        
-
 
 class Platform(pg.sprite.Sprite):
     def __init__(self,x,y,w,h):
