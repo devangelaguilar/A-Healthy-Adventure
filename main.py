@@ -744,7 +744,7 @@ class Anorexia_Level:
         self.spritesheet_mariana = Spritesheet(os.path.join(img_folder,MARIANA_SPRITESHEET))
         #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        #self.background = pg.image.load("img/Depression/Scenario.png")
+        self.background = pg.image.load("img/City_Back.png")
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -764,7 +764,7 @@ class Anorexia_Level:
                 if tile == '0':
                     Floor(self,col,row)
                 if tile == '1':
-                    Floor_Depression(self, col, row)
+                    Floor_Drugs(self, col, row)
                 if tile == '2':
                     Floor_Depression_1(self, col, row)
                 if tile == '6':
@@ -798,8 +798,8 @@ class Anorexia_Level:
 
     def update(self):
         #Update para el loop.
-        self.screen.fill(colors.Material.PINK300)
-        #self.screen.blit(self.background, (0,0))
+        self.screen.fill(colors.WHITE)
+        self.screen.blit(self.background, (0,0))
         self.all_sprites.update()
         self.powerups.update()
         if self.player.vel.y > 0:
