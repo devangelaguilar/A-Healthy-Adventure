@@ -1,4 +1,5 @@
 import pygame as pg
+import math
 import colors
 from settings import *
 from random import choice, randrange
@@ -131,12 +132,13 @@ class Joseph(pg.sprite.Sprite):
             self.walking = False
 
         if self.shoot:
-               if now - self.last_update > 180:
+            if now - self.last_update > 180:
                 self.last_update = now
                 self.current_frame = (self.current_frame + 1) % len(self.punch_frames)
                 bottom = self.rect.bottom
                 self.rect = self.image.get_rect()
-                self.rect.bottom = bottom     
+                self.rect.bottom = bottom   
+
         # show walk animation
         if self.walking:
             if now - self.last_update > 180:
@@ -467,14 +469,23 @@ class Minion_Depression(pg.sprite.Sprite):
         self.rect.y -= 1
         if hits:
             self.vel.y = -PLAYER_JUMP
+    
+    def move_towards_player(self, player):
+        # find normalized direction vector (dx, dy) between enemy and player
+        dx, dy = self.rect.x - player.pos.x, self.rect.y - player.pos.y
+        dist = math.hypot(dx, dy)
+        dx, dy = dx / dist, dy / dist
+        # move along this normalized vector towards the player at current speed
+        self.pos.x += dx * self.vel.x
+        self.pos.y += dy * self.vel.x
 
     def update(self):
         self.animate()
         self.acc = vec(0,PLAYER_GRAV)
-        keys = pg.key.get_pressed()
+        #keys = pg.key.get_pressed()
 
-        if self.pos.x < 0:
-            self.acc.x = -PLAYER_ACC
+        #if self.pos.x < 0:
+            #self.acc.x = -PLAYER_ACC
         #if self.pos.x > 0:
          #   self.acc.x = PLAYER_ACC
 
@@ -484,13 +495,14 @@ class Minion_Depression(pg.sprite.Sprite):
         if abs(self.vel.x) < 0.1:
             self.vel.x = 0
         self.pos += self.vel + 0.5 * self.acc
-        # Se transporta al otro lado de la pantalla(Es bug, si, lo se)
+        # Se transporta al otro lado de la pantalla
         #if self.pos.x > self.game.map.width + self.rect.width / 2:
             #self.pos.x = 0 - self.rect.width / 2
         #if self.pos.x < 0 - self.rect.width / 2:
             #self.pos.x = self.game.map.width + self.rect.width / 2
 
         self.rect.midbottom = self.pos
+        self.move_towards_player(self.game.player)
     
     def animate(self):
         now = pg.time.get_ticks()
@@ -896,12 +908,7 @@ class Proyectil(pg.sprite.Sprite):
         ball = pg.image.load("img/Depression/Energy_Ball.png")
         self.image = ball
         self.image.blit(ball,(0,0))
- 
         self.rect = self.image.get_rect()
-         
-    def update(self):
-        """ Desplaza al proyectil. """
-        self.rect.x += 3
 
 class Pow_Coin(pg.sprite.Sprite):
     def __init__(self, game, x,y):

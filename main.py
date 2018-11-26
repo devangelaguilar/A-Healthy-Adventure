@@ -27,6 +27,8 @@ niveles = ['Depresion',
             'ETS',
             'Regresar al menu principal']
 
+pause = False
+
 class Opcion:
 
     def __init__(self, fuente,text_color,titulo, x, y, igualdad, funcion_asignada):
@@ -305,7 +307,7 @@ class Depression_Level:
             if hits:
                 self.player.pos.y = hits[0].rect.top + 1
                 self.player.vel.y = 0
-            hit_enemy = pg.sprite.spritecollide(self.player, self.enemies, False)
+            hit_enemy = pg.sprite.collide_rect(self.player,self.minion)
             if hit_enemy:
                 self.lifes -= 0.5
         if self.minion.vel.y > 0:
@@ -313,9 +315,6 @@ class Depression_Level:
             if hits:
                 self.minion.pos.y = hits[0].rect.top + 1
                 self.minion.vel.y = 0
-            hit_enemy = pg.sprite.spritecollide(self.player, self.enemies, False)
-            if hit_enemy:
-                self.lifes -= 0.5
         pow_hits = pg.sprite.spritecollide(self.player, self.powerups, True)
 
             
@@ -367,7 +366,11 @@ class Depression_Level:
                 self.running = False
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
-                   self.quitgame()
+                    pg.display.toggle_fullscreen()
+                if event.key == pg.K_p:
+                    global pause
+                    pause = True
+                    self.pause()
 
     def draw(self):
         #Dibujar pantalla durante el loop.
@@ -375,7 +378,7 @@ class Depression_Level:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Nivel de Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 23, 62)
+        self.draw_text('Joystix.ttf', 'Nivel de Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
         self.draw_text('Joystix.ttf', 'Depresion - Area 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
@@ -395,6 +398,31 @@ class Depression_Level:
     def show_go_screen(self):
         #Muestra la pantalla de game over. 
         pass
+    
+
+    def pause(self):
+        pg.mixer.music.stop()
+        reloj = pg.time.Clock()
+        self.load_screen = pg.image.load("img/pause_menu.png").convert_alpha()
+        self.load_screen.set_colorkey(colors.WHITE)
+        while pause:
+            self.screen.blit(self.load_screen,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_c:
+                        self.unpased()
+                    if event.key == pg.K_s:
+                        self.quitgame()
+            pg.display.update()
+            reloj.tick(FPS)
+    
+    def unpased(self):
+        pg.mixer.music.play()
+        global pause
+        pause = False
 
     def draw_text(self, font_name,text, size, color, x, y):
         font = pg.font.Font(font_name, size)
@@ -586,7 +614,7 @@ class Depression_Level_2:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Nivel de Depresion: 75%', 14, colors.WHITE, WIDTH / 32 * 23, 62)
+        self.draw_text('Joystix.ttf', 'Nivel de Depresion: 75%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
         self.draw_text('Joystix.ttf', 'Depresion - Area 2', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
