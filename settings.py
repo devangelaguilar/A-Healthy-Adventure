@@ -29,6 +29,7 @@ PLAYER_HIT_RECT = pg.Rect(0, 0, 10, 10)
 POW_SPAWN_PCT = 1
 
 JOSEPH_SPRITESHEET = 'Joseph_Spritesheet.png'
+JOSEPH_SPRITESHEET_2 = 'Sad Boy 75%.png'
 MARIANA_SPRITESHEET = 'Mariana_Anorexia.png'
 BREATH_DRUGS = 'Breath_Drugs.png'
 WALK_DRUGS = 'Walk_Drugs.png'

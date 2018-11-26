@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# encoding: latin1
 import pygame as pg
 import os
 from pygame.locals import *
@@ -7,24 +9,32 @@ import colors
 from random import randrange
 import datetime
 
-opciones = ['Jugar',
-            'Opciones',
-            'Creditos',
-            'Salir']
+opciones_espanol = ['Jugar',
+                    'Opciones',
+                    'Acerca de',
+                    'Salir']
+                    
+
+opciones_ingles = ['Play',
+                    'Options',
+                    'About',
+                    'Exit']
+
 niveles = ['Depresion',
             'Drogas',
             'Desordenes Alimenticios',
             'Obesidad',
+            'ETS',
             'Regresar al menu principal']
 
 class Opcion:
 
-    def __init__(self, fuente,text_color,titulo, x, y, paridad, funcion_asignada):
+    def __init__(self, fuente,text_color,titulo, x, y, igualdad, funcion_asignada):
         self.imagen_normal = fuente.render(titulo, 1, text_color)
         self.imagen_destacada = fuente.render(titulo, 1, text_color)
         self.image = self.imagen_normal
         self.rect = self.image.get_rect()
-        self.rect.x = 500 * paridad
+        self.rect.x = 500 * igualdad
         self.rect.y = y
         self.funcion_asignada = funcion_asignada
         self.x = float(self.rect.x)
@@ -75,20 +85,83 @@ class Menu:
     def __init__(self, opciones,text_color):
         self.opciones = []
         pg.display.set_caption(TITLE)
-        fuente = pg.font.Font('Joystix.ttf', 30)
+        fuente = pg.font.Font('Joystix.ttf', 25)
         x = WIDTH / 5 * 2
         y = HEIGHT / 2
-        niidea = 1
+        igualdad= 1
 
-        self.cursor = Cursor(x - 40, y, 60)
+        self.cursor = Cursor(x - 40, y, 55)
 
         for titulo, funcion in opciones:
-            self.opciones.append(Opcion(fuente,text_color, titulo, x, y, niidea, funcion))
-            y += 60
-            if niidea == 1:
-                niidea = -1
+            self.opciones.append(Opcion(fuente,text_color,titulo, x, y, igualdad, funcion))
+            y += 55
+            if igualdad == 1:
+                igualdad = -1
             else:
-                niidea = 1
+                igualdad = 1
+
+        self.seleccionado = 0
+        self.total = len(self.opciones)
+        self.mantiene_pulsado = False
+
+    def actualizar(self):
+        """Altera el valor de 'self.seleccionado' con los direccionales."""
+
+        k = pg.key.get_pressed()
+
+        if not self.mantiene_pulsado:
+            if k[K_UP]:
+                self.seleccionado -= 1
+            elif k[K_DOWN]:
+                self.seleccionado += 1
+            elif k[K_RETURN]:
+                # Invoca a la función asociada a la opción.
+                self.opciones[self.seleccionado].activar()
+
+        # procura que el cursor esté entre las opciones permitidas
+        if self.seleccionado < 0:
+            self.seleccionado = 0
+        elif self.seleccionado > self.total - 1:
+            self.seleccionado = self.total - 1
+        
+        self.cursor.seleccionar(self.seleccionado)
+
+        # indica si el usuario mantiene pulsada alguna tecla.
+        self.mantiene_pulsado = k[K_UP] or k[K_DOWN] or k[K_RETURN]
+
+        self.cursor.actualizar()
+     
+        for o in self.opciones:
+            o.actualizar()
+
+    def imprimir(self, screen):
+        """Imprime sobre 'screen' el texto de cada opción del menú."""
+
+        self.cursor.imprimir(screen)
+
+        for opcion in self.opciones:
+            opcion.imprimir(screen)
+
+class Menu_Niveles:
+    os.environ['SDL_VIDEO_CENTERED'] = '1'
+    
+    def __init__(self, opciones,text_color):
+        self.opciones = []
+        pg.display.set_caption(TITLE)
+        fuente = pg.font.Font('Joystix.ttf', 20)
+        x = WIDTH / 5 * 2
+        y = HEIGHT / 12 * 4
+        igualdad= 1
+
+        self.cursor = Cursor(x - 30, y, 50)
+
+        for titulo, funcion in opciones:
+            self.opciones.append(Opcion(fuente,text_color,titulo, x, y, igualdad, funcion))
+            y += 50
+            if igualdad == 1:
+                igualdad = -1
+            else:
+                igualdad = 1
 
         self.seleccionado = 0
         self.total = len(self.opciones)
@@ -153,24 +226,24 @@ class Depression_Level:
 
     def load_data_depression(self):
         self.dir = os.path.dirname(__file__)
-        game_folder = os.path.dirname(__file__)
-        img_folder = os.path.join(game_folder,'img/Depression')
+        self.game_folder = os.path.dirname(__file__)
+        self.img_folder = os.path.join(self.game_folder,'img/Depression')
         with open(os.path.join(self.dir, HS_FILE), 'r') as f:
             try:
                 self.highscore = int(f.read())
             except:
                 self.highscore = 0
-        self.map = Map(os.path.join(game_folder,'maps/Depression - map_1.txt'))
-        self.spritesheet = Spritesheet(os.path.join(img_folder,JOSEPH_SPRITESHEET))
-        self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
-        self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/Depression/Scenario.png")
+        self.map = Map(os.path.join(self.game_folder,'maps/Depression - map_1.txt'))
+        self.spritesheet = Spritesheet(os.path.join(self.img_folder,JOSEPH_SPRITESHEET))
+        self.heart_anim = Spritesheet(os.path.join(self.img_folder,HEART_ANIM))
+        self.heart_ly_anim = Spritesheet(os.path.join(self.img_folder,HEART_LY_ANIM))
+        self.background = pg.image.load("img/Depression/Scenario.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
     def new_game(self):
         #New game.
-        self.score = 00
+        self.score = 0
         self.lifes = 3
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
@@ -214,7 +287,7 @@ class Depression_Level:
             self.events()
             self.draw()
             self.update()
-        pg.mixer.music.fadeout(500)
+        pg.mixer.music.fadeout(1500)
 
     def update(self):
         #Update para el loop.
@@ -228,6 +301,7 @@ class Depression_Level:
                 self.player.pos.y = hits[0].rect.top + 1
                 self.player.vel.y = 0
         pow_hits = pg.sprite.spritecollide(self.player, self.powerups, True)
+
             
         for pow in pow_hits:
             if pow.type == 'coin':
@@ -264,9 +338,7 @@ class Depression_Level:
                 elif self.lifes == 3:
                     self.heart_3 = pg.image.load("img/heart.png")
             elif pow.type == 'door':
-                self.draw_text('Joystix.ttf', 'Level 1 - Complete', 12, colors.WHITE, WIDTH / 32 * 16, 300)
-                pg.time.delay(1000)
-                self.pass_level()
+                self.endlevel()
         self.animate_text_ly()
         self.camera.update(self.player)
 
@@ -287,7 +359,8 @@ class Depression_Level:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Depression - A Long Way From Myself', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        self.draw_text('Joystix.ttf', 'Nivel de Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 23, 62)
+        self.draw_text('Joystix.ttf', 'Depresion - Area 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -318,17 +391,31 @@ class Depression_Level:
         pg.quit()
         quit()
 
-    def pass_level(self):
-        d_l_2 = Depression_Level_2()
-        d_l_2.show_start_screen()
-        
-        while d_l_2.running:
+    def endlevel(self):
+        pg.mixer.music.stop()
+        screen_load = True
+        self.load_screen = pg.image.load("img/Depression/depresion_screen_1.png")
+        while screen_load:
+            self.screen.fill(colors.WHITE)
+            self.screen.blit(self.load_screen,(0,0))
+            self.draw_text('Joystix.ttf', 'Area Completeda!', 18, colors.BLACK, WIDTH / 32 * 16, 182)
+            self.draw_text('Joystix.ttf', 'Felicidades!', 18, colors.BLACK, WIDTH / 32 * 16, 242)
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_RETURN:
+                        d_l_2 = Depression_Level_2()
+                        d_l_2.show_start_screen()
+                        
+                        while d_l_2.running:
 
-            d_l_2.new_game()
-            d_l_2.show_go_screen()
+                            d_l_2.new_game()
+                            d_l_2.show_go_screen()
 
-        pg.quit()
-
+                        pg.quit()
+            pg.display.update()
 
 class Depression_Level_2:
     def __init__(self):
@@ -359,10 +446,10 @@ class Depression_Level_2:
             except:
                 self.highscore = 0
         self.map = Map(os.path.join(game_folder,'maps/Depression - map_2.txt'))
-        self.spritesheet = Spritesheet(os.path.join(img_folder,JOSEPH_SPRITESHEET))
+        self.spritesheet = Spritesheet(os.path.join(img_folder,JOSEPH_SPRITESHEET_2))
         self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/Depression/Scenario.png")
+        self.background = pg.image.load("img/Depression/Scenario.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -416,7 +503,8 @@ class Depression_Level_2:
 
     def update_depression(self):
         #Update para el loop.
-        self.screen.fill(colors.Material.GREY900)
+        self.screen.fill(colors.WHITE)
+        self.screen.blit(self.background, (0,0))
         self.all_sprites.update()
         self.powerups.update()
         if self.player.vel.y > 0:
@@ -482,7 +570,8 @@ class Depression_Level_2:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Depression - A Long Way From Myself', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        self.draw_text('Joystix.ttf', 'Nivel de Depresion: 75%', 14, colors.WHITE, WIDTH / 32 * 23, 62)
+        self.draw_text('Joystix.ttf', 'Depresion - Area 2', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -534,8 +623,8 @@ class Drugs_level:
         pg.key.set_repeat(1, 10)
         self.clock = pg.time.Clock()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
-        pg.display.set_caption(TITLE)
         self.running = True
+        pg.display.set_caption(TITLE)
         self.heart = pg.image.load("img/heart.png").convert_alpha()
         self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
         self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
@@ -559,7 +648,7 @@ class Drugs_level:
         self.breath_player = Spritesheet(os.path.join(img_folder,BREATH_DRUGS))
         self.walk_player = Spritesheet(os.path.join(img_folder,WALK_DRUGS))
         self.snd_dir = os.path.join(self.dir, 'snd')
-        self.background = pg.image.load("img/City Re-Sized(Night)(Scenario).png").convert()
+        self.background = pg.image.load("img/City Re-Sized(Night)(Scenario).png").convert_alpha()
     
 
     def new(self):
@@ -610,6 +699,7 @@ class Drugs_level:
         #Update para el loop.
         self.all_sprites.update()
         self.powerups.update()
+
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.walls, False)
             if hits:
@@ -652,7 +742,7 @@ class Drugs_level:
                 elif self.lifes == 3:
                     self.heart_3 = pg.image.load("img/heart.png")
             elif pow.type == 'door':
-                self.quitgame()
+                self.endlevel()
         self.animate_text_ly()
         self.camera.update(self.player)
 
@@ -677,7 +767,7 @@ class Drugs_level:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.img_score,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Drugs - Say No.', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        self.draw_text('Joystix.ttf', 'Drogas - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -691,10 +781,7 @@ class Drugs_level:
         pass
 
     def show_start_screen(self):
-        self.milledo_dogio = pg.image.load("img/logo_1.png")
-        self.screen.blit(self.milledo_dogio,(0,0))
-        pg.time.delay(1000)
-
+        pass
 
     def show_go_screen(self):
         #Muestra la pantalla de game over. 
@@ -708,9 +795,28 @@ class Drugs_level:
         text_rect.midtop = (x, y)
         self.screen.blit(text_surface, text_rect)
     
-    def quitgame(self):
-        pg.quit()
-        quit()
+    def endlevel(self):
+        screen_load = True
+        self.load_screen = pg.image.load("img/Depression/depresion_screen_1.png")
+        while screen_load:
+            self.screen.fill(colors.WHITE)
+            self.screen.blit(self.load_screen,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_RETURN:
+                        a_l = Anorexia_Level()
+                        a_l.show_start_screen()
+                        
+                        while a_l.running:
+
+                            a_l.new_game()
+                            a_l.show_go_screen()
+
+                        pg.quit()
+            pg.display.update()
 
 class Anorexia_Level:
     def __init__(self):
@@ -744,7 +850,7 @@ class Anorexia_Level:
         self.spritesheet_mariana = Spritesheet(os.path.join(img_folder,MARIANA_SPRITESHEET))
         #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/City_Back.png")
+        self.background = pg.image.load("img/City_Back.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -790,6 +896,8 @@ class Anorexia_Level:
         #pg.mixer.music.play(loops=-1)
         self.playing = True
         while self.playing:
+            self.screen.fill(colors.WHITE)
+            self.screen.blit(self.background, (0,0))
             self.clock.tick(FPS)
             self.events()
             self.draw()
@@ -798,8 +906,6 @@ class Anorexia_Level:
 
     def update(self):
         #Update para el loop.
-        self.screen.fill(colors.WHITE)
-        self.screen.blit(self.background, (0,0))
         self.all_sprites.update()
         self.powerups.update()
         if self.player.vel.y > 0:
@@ -898,16 +1004,26 @@ class Anorexia_Level:
         pg.quit()
         quit()
 
-    def pass_level(self):
-        d_l_2 = Depression_Level_2()
-        d_l_2.show_start_screen()
+    def pass_level_screen_1(self):
+        pg.init()
+        pg.mixer.init()
+        os.environ['SDL_VIDEO_CENTERED'] = '1'
+        fuente = pg.font.Font('Joystix.ttf', 20)
+        pg.key.set_repeat(1, 10)
+        self.clock = pg.time.Clock()
+        screen = pg.display.set_mode((WIDTH, HEIGHT))
+        pg.display.set_caption(TITLE)
+        back = pg.image.load("img/Depression/depresion_screen_1.png").convert_alpha()
+        screen.blit(back,(0,0))
+        #d_l_2 = Depression_Level_2()
+        #d_l_2.show_start_screen()
         
-        while d_l_2.running:
+        #while d_l_2.running:
 
-            d_l_2.new_game()
-            d_l_2.show_go_screen()
+            #d_l_2.new_game()
+            #d_l_2.show_go_screen()
 
-        pg.quit()
+        #pg.quit()
 
 
 
@@ -929,32 +1045,35 @@ def select_level():
                     (niveles[1], drugs),
                     (niveles[2], food_disorders),
                     (niveles[3], obesity),
-                    (niveles[4],main_menu)]
+                    (niveles[4],main_menu),
+                    (niveles[5],main_menu)]
 
 
     pg.font.init()
     screen = pg.display.set_mode((WIDTH, HEIGHT))
-    menu = Menu(opcion,colors.BLACK)
+    levels_screen = pg.image.load("img/levels_menu.png").convert_alpha()
+    menu = Menu_Niveles(opcion,colors.WHITE)
 
     while not salir:
 
         for e in pg.event.get():
             if e.type == QUIT:
                 salir = True
+                os.sys.exit()
 
-        screen.fill(colors.WHITE)
+        screen.blit(levels_screen,(0,0))
         menu.actualizar()
         menu.imprimir(screen)
 
         pg.display.flip()
         pg.time.delay(10)
+    pg.display.quit()
 
 def drugs():
     g = Drugs_level()
     g.show_start_screen()
         
     while g.running:
-
         g.new()
         g.show_go_screen()
 
@@ -988,9 +1107,37 @@ def exit_out():
 def language():
     if __name__ == '__main__':
         salir = False
-        opciones = [('Spanish', main_menu),
+        opciones = [('Spanish',main_menu),
                     ('English', main_menu),
                     ('Salir',exit_out)]
+
+    pg.font.init()
+    screen = pg.display.set_mode((WIDTH, HEIGHT))
+    fondo = pg.image.load("img/language_menu.png").convert()
+    menu = Menu(opciones,colors.WHITE)
+
+    while not salir:
+        for e in pg.event.get():
+            if e.type == QUIT:
+                salir = True
+                os.sys.exit()
+
+        screen.blit(fondo,(0,0))
+        menu.actualizar()
+        menu.imprimir(screen)
+
+        pg.display.flip()
+        pg.time.delay(10)
+    pg.display.quit()
+
+
+def main_menu():
+    if __name__ == '__main__':
+        salir = False
+        opciones = [  (opciones_espanol[0], select_level),
+                        (opciones_espanol[1], options),
+                        (opciones_espanol[2], creditos),
+                        (opciones_espanol[3], exit_out)]
 
     pg.font.init()
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -1002,6 +1149,7 @@ def language():
         for e in pg.event.get():
             if e.type == QUIT:
                 salir = True
+                os.sys.exit()
 
         screen.blit(fondo,(0,0))
         menu.actualizar()
@@ -1010,30 +1158,5 @@ def language():
         pg.display.flip()
         pg.time.delay(10)
 
-def main_menu():
-    if __name__ == '__main__':
-        salir = False
-        opcion = [  (opciones[0], select_level),
-                    (opciones[1], options),
-                    (opciones[2], creditos),
-                    (opciones[3], exit_out) ]
-
-    pg.font.init()
-    screen = pg.display.set_mode((WIDTH, HEIGHT))
-    fondo = pg.image.load("img/main_menu.png").convert()
-    menu = Menu(opcion,colors.BLACK)
-
-    while not salir:
-
-        for e in pg.event.get():
-            if e.type == QUIT:
-                salir = True
-
-        screen.blit(fondo,(0,0))
-        menu.actualizar()
-        menu.imprimir(screen)
-
-        pg.display.flip()
-        pg.time.delay(10)
 
 language()
