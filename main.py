@@ -235,6 +235,7 @@ class Depression_Level:
                 self.highscore = 0
         self.map = Map(os.path.join(self.game_folder,'maps/Depression - map_1.txt'))
         self.spritesheet = Spritesheet(os.path.join(self.img_folder,JOSEPH_SPRITESHEET))
+        self.spritesheet_minion = Spritesheet(os.path.join(self.img_folder,MINION_DEPRESSION_SPRITESHEET))
         self.heart_anim = Spritesheet(os.path.join(self.img_folder,HEART_ANIM))
         self.heart_ly_anim = Spritesheet(os.path.join(self.img_folder,HEART_LY_ANIM))
         self.background = pg.image.load("img/Depression/Scenario.png").convert_alpha()
@@ -248,6 +249,7 @@ class Depression_Level:
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.powerups = pg.sprite.Group()
+        self.enemies = pg.sprite.Group()
         self.current_frame = 0
         self.last_update = 0
         self.load_arrays()
@@ -272,6 +274,8 @@ class Depression_Level:
                     self.player = Joseph(self, col, row)
                 if tile == 'D':
                     Door(self,col,row)
+                if tile == 'M':
+                    self.minion = Minion_Depression(self,col,row)
         pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
         pg.mixer.music.set_volume(1);
         self.camera = Camara(self.map.width,self.map.height)
@@ -295,11 +299,23 @@ class Depression_Level:
         self.screen.blit(self.background, (0,0))
         self.all_sprites.update()
         self.powerups.update()
+        self.enemies.update()
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.walls, False)
             if hits:
                 self.player.pos.y = hits[0].rect.top + 1
                 self.player.vel.y = 0
+            hit_enemy = pg.sprite.spritecollide(self.player, self.enemies, False)
+            if hit_enemy:
+                self.lifes -= 0.5
+        if self.minion.vel.y > 0:
+            hits = pg.sprite.spritecollide(self.minion, self.walls, False)
+            if hits:
+                self.minion.pos.y = hits[0].rect.top + 1
+                self.minion.vel.y = 0
+            hit_enemy = pg.sprite.spritecollide(self.player, self.enemies, False)
+            if hit_enemy:
+                self.lifes -= 0.5
         pow_hits = pg.sprite.spritecollide(self.player, self.powerups, True)
 
             
@@ -950,9 +966,7 @@ class Anorexia_Level:
                 elif self.lifes == 3:
                     self.heart_3 = pg.image.load("img/heart.png")
             elif pow.type == 'door':
-                self.draw_text('Joystix.ttf', 'Level 1 - Complete', 12, colors.WHITE, WIDTH / 32 * 16, 300)
-                pg.time.delay(1000)
-                self.pass_level()
+                self.quitgame()
         self.animate_text_ly()
         self.camera.update(self.player)
 
@@ -1004,27 +1018,373 @@ class Anorexia_Level:
         pg.quit()
         quit()
 
-    def pass_level_screen_1(self):
+class Obesidad_Level:
+    def __init__(self):
+        #Inicia el juego, ventana, etc.
         pg.init()
         pg.mixer.init()
         os.environ['SDL_VIDEO_CENTERED'] = '1'
         fuente = pg.font.Font('Joystix.ttf', 20)
         pg.key.set_repeat(1, 10)
         self.clock = pg.time.Clock()
-        screen = pg.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
-        back = pg.image.load("img/Depression/depresion_screen_1.png").convert_alpha()
-        screen.blit(back,(0,0))
-        #d_l_2 = Depression_Level_2()
-        #d_l_2.show_start_screen()
-        
-        #while d_l_2.running:
+        self.running = True
+        self.heart = pg.image.load("img/heart.png").convert_alpha()
+        self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+        self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
+        self.lm = pg.image.load("img/heart_ly.png").convert_alpha()
+        self.font_name = pg.font.match_font(FONT_NAME)
+        self.load_data_depression()
 
-            #d_l_2.new_game()
-            #d_l_2.show_go_screen()
+    def load_data_depression(self):
+        self.dir = os.path.dirname(__file__)
+        game_folder = os.path.dirname(__file__)
+        img_folder = os.path.join(game_folder,'img')
+        with open(os.path.join(self.dir, HS_FILE), 'r') as f:
+            try:
+                self.highscore = int(f.read())
+            except:
+                self.highscore = 0
+        self.map = Map(os.path.join(game_folder,'maps/Obesidad - map_1.txt'))
+        self.spritesheet_don_juan = Spritesheet(os.path.join(img_folder,JUAN_SPRITESHEET))
+        #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
+        #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
+        self.background = pg.image.load("img/City_Back.png").convert_alpha()
+        self.snd_dir = os.path.join(self.dir, 'snd')
+    
 
-        #pg.quit()
+    def new_game(self):
+        #New game.
+        self.score = 00
+        self.lifes = 3
+        self.all_sprites = pg.sprite.Group()
+        self.walls = pg.sprite.Group()
+        self.powerups = pg.sprite.Group()
+        self.current_frame = 0
+        self.last_update = 0
+        self.load_arrays()
+        #self.text = self.lov[0]
+        for row, tiles in enumerate(self.map.data):
+            for col, tile in enumerate(tiles):
+                if tile == '0':
+                    Floor(self,col,row)
+                if tile == '1':
+                    Floor_Drugs(self, col, row)
+                if tile == '2':
+                    Floor_Depression_1(self, col, row)
+                if tile == '6':
+                    Floor_Depression_2(self,col,row)
+                if tile == '3':
+                    Pow_Life(self,col,row)
+                if tile == '4':
+                    Minus_Life(self,col,row)
+                #if tile == '5':
+                    #Pow_Coin(self,col,row)
+                if tile == 'P':
+                    self.player = Don_Juan(self, col, row)
+                if tile == 'D':
+                    Door(self,col,row)
+        pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
+        pg.mixer.music.set_volume(1);
+        self.camera = Camara(self.map.width,self.map.height)
+        self.run()
 
+
+    def run(self):
+        #Loop Principal.
+        #pg.mixer.music.play(loops=-1)
+        self.playing = True
+        while self.playing:
+            self.screen.fill(colors.WHITE)
+            self.screen.blit(self.background, (0,0))
+            self.clock.tick(FPS)
+            self.events()
+            self.draw()
+            self.update()
+        #pg.mixer.music.fadeout(500)
+
+    def update(self):
+        #Update para el loop.
+        self.all_sprites.update()
+        self.powerups.update()
+        if self.player.vel.y > 0:
+            hits = pg.sprite.spritecollide(self.player, self.walls, False)
+            if hits:
+                self.player.pos.y = hits[0].rect.top + 1
+                self.player.vel.y = 0
+        pow_hits = pg.sprite.spritecollide(self.player, self.powerups, True)
+            
+        for pow in pow_hits:
+            if pow.type == 'coin':
+                self.score += 10
+                self.player.jumping = False
+            elif pow.type == 'life':
+                self.lifes += 0.5
+                if self.lifes == 0.5:
+                    self.heart = pg.image.load("img/half_heart.png")
+                elif self.lifes == 1:
+                    self.heart = pg.image.load("img/heart.png")
+                elif self.lifes == 1.5:
+                    self.heart_2 = pg.image.load("img/half_heart.png")
+                elif self.lifes == 2:
+                    self.heart_2 = pg.image.load("img/heart.png")
+                elif self.lifes == 2.5:
+                    self.heart_3 = pg.image.load("img/half_heart.png")
+                elif self.lifes == 3:
+                    self.heart_3 = pg.image.load("img/heart.png")
+            elif pow.type == 'minus_life':
+                self.lifes -= 0.5
+                if self.lifes == 0:
+                    self.heart = pg.image.load("img/no_heart.png")
+                if self.lifes == 0.5:
+                    self.heart = pg.image.load("img/half_heart.png")
+                elif self.lifes == 1:
+                    self.heart = pg.image.load("img/heart.png")
+                elif self.lifes == 1.5:
+                    self.heart_2 = pg.image.load("img/half_heart.png")
+                elif self.lifes == 2:
+                    self.heart_2 = pg.image.load("img/heart.png")
+                elif self.lifes == 2.5:
+                    self.heart_3 = pg.image.load("img/half_heart.png")
+                elif self.lifes == 3:
+                    self.heart_3 = pg.image.load("img/heart.png")
+            elif pow.type == 'door':
+                self.quitgame()
+        self.animate_text_ly()
+        self.camera.update(self.player)
+
+    def events(self):
+        #Eventos del loop.
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                if self.playing:  
+                    self.playing = False
+                self.running = False
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE:
+                   self.quitgame()
+
+    def draw(self):
+        #Dibujar pantalla durante el loop.
+        for sprite in self.all_sprites:
+            self.screen.blit(sprite.image,self.camera.apply(sprite))
+        self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
+        self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
+        self.draw_text('Joystix.ttf', 'Obesidad - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
+        self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
+        self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
+        pg.display.flip()
+
+    def animate_text_ly(self):
+        pass
+
+    def load_arrays(self):
+        pass
+
+    def show_start_screen(self):
+        pass
+
+
+    def show_go_screen(self):
+        #Muestra la pantalla de game over. 
+        pass
+
+    def draw_text(self, font_name,text, size, color, x, y):
+        font = pg.font.Font(font_name, size)
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (x, y)
+        self.screen.blit(text_surface, text_rect)
+    
+    def quitgame(self):
+        pg.quit()
+        quit()
+
+class ETS_Level:
+    def __init__(self):
+        #Inicia el juego, ventana, etc.
+        pg.init()
+        pg.mixer.init()
+        os.environ['SDL_VIDEO_CENTERED'] = '1'
+        fuente = pg.font.Font('Joystix.ttf', 20)
+        pg.key.set_repeat(1, 10)
+        self.clock = pg.time.Clock()
+        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
+        pg.display.set_caption(TITLE)
+        self.running = True
+        self.heart = pg.image.load("img/heart.png").convert_alpha()
+        self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+        self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
+        self.lm = pg.image.load("img/heart_ly.png").convert_alpha()
+        self.font_name = pg.font.match_font(FONT_NAME)
+        self.load_data_depression()
+
+    def load_data_depression(self):
+        self.dir = os.path.dirname(__file__)
+        game_folder = os.path.dirname(__file__)
+        img_folder = os.path.join(game_folder,'img')
+        with open(os.path.join(self.dir, HS_FILE), 'r') as f:
+            try:
+                self.highscore = int(f.read())
+            except:
+                self.highscore = 0
+        self.map = Map(os.path.join(game_folder,'maps/ETS - map_1.txt'))
+        self.spritesheet_macho = Spritesheet(os.path.join(img_folder,MACHO_SPRITESHEET))
+        #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
+        #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
+        self.background = pg.image.load("img/City_Back.png").convert_alpha()
+        self.snd_dir = os.path.join(self.dir, 'snd')
+    
+
+    def new_game(self):
+        #New game.
+        self.score = 00
+        self.lifes = 3
+        self.all_sprites = pg.sprite.Group()
+        self.walls = pg.sprite.Group()
+        self.powerups = pg.sprite.Group()
+        self.current_frame = 0
+        self.last_update = 0
+        self.load_arrays()
+        #self.text = self.lov[0]
+        for row, tiles in enumerate(self.map.data):
+            for col, tile in enumerate(tiles):
+                if tile == '0':
+                    Floor(self,col,row)
+                if tile == '1':
+                    Floor_Drugs(self, col, row)
+                if tile == '2':
+                    Floor_Depression_1(self, col, row)
+                if tile == '6':
+                    Floor_Depression_2(self,col,row)
+                if tile == '3':
+                    Pow_Life(self,col,row)
+                if tile == '4':
+                    Minus_Life(self,col,row)
+                #if tile == '5':
+                    #Pow_Coin(self,col,row)
+                if tile == 'P':
+                    self.player = El_Macho(self, col, row)
+                if tile == 'D':
+                    Door(self,col,row)
+        pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
+        pg.mixer.music.set_volume(1);
+        self.camera = Camara(self.map.width,self.map.height)
+        self.run()
+
+
+    def run(self):
+        #Loop Principal.
+        #pg.mixer.music.play(loops=-1)
+        self.playing = True
+        while self.playing:
+            self.screen.fill(colors.WHITE)
+            self.screen.blit(self.background, (0,0))
+            self.clock.tick(FPS)
+            self.events()
+            self.draw()
+            self.update()
+        #pg.mixer.music.fadeout(500)
+
+    def update(self):
+        #Update para el loop.
+        self.all_sprites.update()
+        self.powerups.update()
+        if self.player.vel.y > 0:
+            hits = pg.sprite.spritecollide(self.player, self.walls, False)
+            if hits:
+                self.player.pos.y = hits[0].rect.top + 1
+                self.player.vel.y = 0
+        pow_hits = pg.sprite.spritecollide(self.player, self.powerups, True)
+            
+        for pow in pow_hits:
+            if pow.type == 'coin':
+                self.score += 10
+                self.player.jumping = False
+            elif pow.type == 'life':
+                self.lifes += 0.5
+                if self.lifes == 0.5:
+                    self.heart = pg.image.load("img/half_heart.png")
+                elif self.lifes == 1:
+                    self.heart = pg.image.load("img/heart.png")
+                elif self.lifes == 1.5:
+                    self.heart_2 = pg.image.load("img/half_heart.png")
+                elif self.lifes == 2:
+                    self.heart_2 = pg.image.load("img/heart.png")
+                elif self.lifes == 2.5:
+                    self.heart_3 = pg.image.load("img/half_heart.png")
+                elif self.lifes == 3:
+                    self.heart_3 = pg.image.load("img/heart.png")
+            elif pow.type == 'minus_life':
+                self.lifes -= 0.5
+                if self.lifes == 0:
+                    self.heart = pg.image.load("img/no_heart.png")
+                if self.lifes == 0.5:
+                    self.heart = pg.image.load("img/half_heart.png")
+                elif self.lifes == 1:
+                    self.heart = pg.image.load("img/heart.png")
+                elif self.lifes == 1.5:
+                    self.heart_2 = pg.image.load("img/half_heart.png")
+                elif self.lifes == 2:
+                    self.heart_2 = pg.image.load("img/heart.png")
+                elif self.lifes == 2.5:
+                    self.heart_3 = pg.image.load("img/half_heart.png")
+                elif self.lifes == 3:
+                    self.heart_3 = pg.image.load("img/heart.png")
+            elif pow.type == 'door':
+                self.quitgame()
+        self.animate_text_ly()
+        self.camera.update(self.player)
+
+    def events(self):
+        #Eventos del loop.
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                if self.playing:  
+                    self.playing = False
+                self.running = False
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE:
+                   self.quitgame()
+
+    def draw(self):
+        #Dibujar pantalla durante el loop.
+        for sprite in self.all_sprites:
+            self.screen.blit(sprite.image,self.camera.apply(sprite))
+        self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
+        self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
+        self.draw_text('Joystix.ttf', 'ETS - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
+        self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
+        self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
+        pg.display.flip()
+
+    def animate_text_ly(self):
+        pass
+
+    def load_arrays(self):
+        pass
+
+    def show_start_screen(self):
+        pass
+
+
+    def show_go_screen(self):
+        #Muestra la pantalla de game over. 
+        pass
+
+    def draw_text(self, font_name,text, size, color, x, y):
+        font = pg.font.Font(font_name, size)
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (x, y)
+        self.screen.blit(text_surface, text_rect)
+    
+    def quitgame(self):
+        pg.quit()
+        quit()
 
 
 def depression():
@@ -1045,7 +1405,7 @@ def select_level():
                     (niveles[1], drugs),
                     (niveles[2], food_disorders),
                     (niveles[3], obesity),
-                    (niveles[4],main_menu),
+                    (niveles[4],ets),
                     (niveles[5],main_menu)]
 
 
@@ -1091,7 +1451,26 @@ def food_disorders():
     pg.quit()
 
 def obesity():
-    pass
+    o_l = Obesidad_Level()
+    o_l.show_start_screen()
+        
+    while o_l.running:
+
+        o_l.new_game()
+        o_l.show_go_screen()
+
+    pg.quit()
+
+def ets():
+    e_l = ETS_Level()
+    e_l.show_start_screen()
+        
+    while e_l.running:
+
+        e_l.new_game()
+        e_l.show_go_screen()
+
+    pg.quit()
 
 def options():
     pass

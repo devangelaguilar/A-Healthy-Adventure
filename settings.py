@@ -1,6 +1,6 @@
 import pygame as pg
 #Opciones
-TITLE = "A Healthy Adventure - Vesion: Alpha 0.6 - Milledo Dogio"
+TITLE = "A Healthy Adventure | Milledo Dogio"
 
 PLAYER_ACC = 0.6
 PLAYER_FRICTION = -0.14
@@ -30,7 +30,10 @@ POW_SPAWN_PCT = 1
 
 JOSEPH_SPRITESHEET = 'Joseph_Spritesheet.png'
 JOSEPH_SPRITESHEET_2 = 'Sad Boy 75%.png'
+MINION_DEPRESSION_SPRITESHEET = 'Enemies/Minion - Spritesheet.png'
 MARIANA_SPRITESHEET = 'Mariana_Anorexia.png'
+JUAN_SPRITESHEET = 'final_deportista_obesidad.png'
+MACHO_SPRITESHEET = 'El_Macho.png'
 BREATH_DRUGS = 'Breath_Drugs.png'
 WALK_DRUGS = 'Walk_Drugs.png'
 HEART_ANIM = 'heart_anim.png'
