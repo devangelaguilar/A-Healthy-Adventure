@@ -101,13 +101,12 @@ class Joseph(pg.sprite.Sprite):
         if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
             self.jump()
         if keys[pg.K_m]:
-            self.shoot = True
-            proyectil = Proyectil()
+            proyectil = Proyectil(self.pos.x,self.pos.y)
+            self.game.screen.blit(proyectil.image,(self.pos.x,self.pos.y))
             # Configuramos el proyectil de forma que esté donde el protagonista
-            proyectil.rect.x = self.rect.x + 20
-            proyectil.rect.y = self.rect.y + 20
             # Añadimos el proyectil a la lista
-            self.game.all_sprites.add(proyectil)
+            self.game.proyectiles.add(proyectil)
+            proyectil.update()
 
         self.acc.x += self.vel.x * PLAYER_FRICTION
         #Ecuaciones de Motricidad
@@ -482,10 +481,16 @@ class Minion_Depression(pg.sprite.Sprite):
     def update(self):
         self.animate()
         self.acc = vec(0,PLAYER_GRAV)
-        #keys = pg.key.get_pressed()
-
+        keys = pg.key.get_pressed()
+        
+        if keys[pg.K_LEFT] or keys[pg.K_a]:
+            self.acc.x = -ENEMY_ACC
+        if keys[pg.K_RIGHT] or keys[pg.K_d]:
+            self.acc.x = -ENEMY_ACC
+        if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
+            self.acc.x = -ENEMY_ACC
         #if self.pos.x < 0:
-            #self.acc.x = -PLAYER_ACC
+         #   self.acc.x = -PLAYER_ACC
         #if self.pos.x > 0:
          #   self.acc.x = PLAYER_ACC
 
@@ -495,14 +500,13 @@ class Minion_Depression(pg.sprite.Sprite):
         if abs(self.vel.x) < 0.1:
             self.vel.x = 0
         self.pos += self.vel + 0.5 * self.acc
-        # Se transporta al otro lado de la pantalla
+        # Se transporta al otro lado de la pantalla(Es bug, si, lo se)
         #if self.pos.x > self.game.map.width + self.rect.width / 2:
             #self.pos.x = 0 - self.rect.width / 2
         #if self.pos.x < 0 - self.rect.width / 2:
             #self.pos.x = self.game.map.width + self.rect.width / 2
 
         self.rect.midbottom = self.pos
-        self.move_towards_player(self.game.player)
     
     def animate(self):
         now = pg.time.get_ticks()
@@ -900,15 +904,20 @@ class Floor(pg.sprite.Sprite):
         self.x = x
         self.y = y
 
-class Proyectil(pg.sprite.Sprite):
-    def __init__(self):
-        #  Llama al constructor de la clase padre (Sprite)
-        super().__init__() 
- 
-        ball = pg.image.load("img/Depression/Energy_Ball.png")
-        self.image = ball
-        self.image.blit(ball,(0,0))
-        self.rect = self.image.get_rect()
+class Proyectil(pg.sprite.Sprite ):  #"heredamos" los métodos de la clase Sprite nativa en pygame
+    def __init__(self, pos_i_x, pos_i_y ): #inicializamos la clase con dos valores, de la posición inicial en "x" y en "y"
+        pg.sprite.Sprite.__init__(self) #inicializamos la clase que heredamos...
+        self.image = pg.image.load("img/Depression/Energy_Ball.png") #asumo, ya la tienes hecha :)
+        self.rect = self.image.get_rect() #obtenemos las "rectas" de nuestra imagen...
+        self.rect.center = (pos_i_x, pos_i_y) #colocamos la imagen en la posición inicial :)
+        #ahora, definiremos la velocidad de nuestra bala :)
+        self.dx = 0   # la velocidad en x 
+        self.dy = -3 # la velocidad en y, recuerda por que es negativa :)
+
+    def update(self):
+        self.rect.move_ip((self.dx, self.dy)) #esto mueve continuamente nuestra bala
+        if self.rect.y < 0 : #esto revisa si la bala sale por la parte superior de la pantalla :)
+            self.kill() #... y la destruye si sale
 
 class Pow_Coin(pg.sprite.Sprite):
     def __init__(self, game, x,y):

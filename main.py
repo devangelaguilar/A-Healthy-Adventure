@@ -28,6 +28,7 @@ niveles = ['Depresion',
             'Regresar al menu principal']
 
 pause = False
+idioma = 0
 
 class Opcion:
 
@@ -252,6 +253,7 @@ class Depression_Level:
         self.walls = pg.sprite.Group()
         self.powerups = pg.sprite.Group()
         self.enemies = pg.sprite.Group()
+        self.proyectiles = pg.sprite.Group()
         self.current_frame = 0
         self.last_update = 0
         self.load_arrays()
@@ -315,6 +317,7 @@ class Depression_Level:
             if hits:
                 self.minion.pos.y = hits[0].rect.top + 1
                 self.minion.vel.y = 0
+            col_hit = pg.sprite.spritecollide(self.minion,self.proyectiles,True)
         pow_hits = pg.sprite.spritecollide(self.player, self.powerups, True)
 
             
@@ -378,8 +381,12 @@ class Depression_Level:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Nivel de Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
-        self.draw_text('Joystix.ttf', 'Depresion - Area 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        if idioma == 0:
+            self.draw_text('Joystix.ttf', 'Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('Joystix.ttf', 'Depresion - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        else:
+            self.draw_text('Joystix.ttf', 'Depression: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('Joystix.ttf', 'Depression - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -415,7 +422,7 @@ class Depression_Level:
                     if event.key == pg.K_c:
                         self.unpased()
                     if event.key == pg.K_s:
-                        self.quitgame()
+                        select_level()
             pg.display.update()
             reloj.tick(FPS)
     
@@ -614,8 +621,12 @@ class Depression_Level_2:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Nivel de Depresion: 75%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
-        self.draw_text('Joystix.ttf', 'Depresion - Area 2', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        if idioma == 0:
+            self.draw_text('Joystix.ttf', 'Depresion: 75%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('Joystix.ttf', 'Depresion - Nivel 2', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        else:
+            self.draw_text('Joystix.ttf', 'Depression: 75%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('Joystix.ttf', 'Depression - Level 2', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -692,7 +703,7 @@ class Drugs_level:
         self.breath_player = Spritesheet(os.path.join(img_folder,BREATH_DRUGS))
         self.walk_player = Spritesheet(os.path.join(img_folder,WALK_DRUGS))
         self.snd_dir = os.path.join(self.dir, 'snd')
-        self.background = pg.image.load("img/City Re-Sized(Night)(Scenario).png").convert_alpha()
+        self.background = pg.image.load("img/Fondo Drogas.png").convert_alpha()
     
 
     def new(self):
@@ -811,7 +822,10 @@ class Drugs_level:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.img_score,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Drogas - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        if idioma == 0:
+            self.draw_text('Joystix.ttf', 'Drogas - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        else:
+            self.draw_text('Joystix.ttf', 'Drugs - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -890,11 +904,11 @@ class Anorexia_Level:
                 self.highscore = int(f.read())
             except:
                 self.highscore = 0
-        self.map = Map(os.path.join(game_folder,'maps/Depression - map_1.txt'))
+        self.map = Map(os.path.join(game_folder,'maps/Anorexia - map_1.txt'))
         self.spritesheet_mariana = Spritesheet(os.path.join(img_folder,MARIANA_SPRITESHEET))
         #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/City_Back.png").convert_alpha()
+        self.background = pg.image.load("img/Fondo Anorexia.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -1015,7 +1029,10 @@ class Anorexia_Level:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Anorexia - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        if idioma == 0:
+            self.draw_text('Joystix.ttf', 'Anorexia - Area 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        else:
+            self.draw_text('Joystix.ttf', 'Anorexia - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -1078,7 +1095,7 @@ class Obesidad_Level:
         self.spritesheet_don_juan = Spritesheet(os.path.join(img_folder,JUAN_SPRITESHEET))
         #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/City_Back.png").convert_alpha()
+        self.background = pg.image.load("img/Estadio_Obesity.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -1262,7 +1279,7 @@ class ETS_Level:
         self.spritesheet_macho = Spritesheet(os.path.join(img_folder,MACHO_SPRITESHEET))
         #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/City_Back.png").convert_alpha()
+        self.background = pg.image.load("img/Fondo ETS.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -1514,8 +1531,8 @@ def exit_out():
 def language():
     if __name__ == '__main__':
         salir = False
-        opciones = [('Spanish',main_menu),
-                    ('English', main_menu),
+        opciones = [('Spanish',espanol),
+                    ('English', ingles),
                     ('Salir',exit_out)]
 
     pg.font.init()
@@ -1537,14 +1554,30 @@ def language():
         pg.time.delay(10)
     pg.display.quit()
 
+def espanol():
+    global idioma
+    idioma = 0
+    main_menu()
+
+def ingles():
+    global idioma
+    idioma = 1
+    main_menu()
+
 
 def main_menu():
     if __name__ == '__main__':
         salir = False
-        opciones = [  (opciones_espanol[0], select_level),
-                        (opciones_espanol[1], options),
-                        (opciones_espanol[2], creditos),
-                        (opciones_espanol[3], exit_out)]
+        if idioma == 0:
+            opciones = [  (opciones_espanol[0], select_level),
+                            (opciones_espanol[1], options),
+                            (opciones_espanol[2], creditos),
+                            (opciones_espanol[3], exit_out)]
+        if idioma == 1:
+            opciones = [  (opciones_ingles[0], select_level),
+                            (opciones_ingles[1], options),
+                            (opciones_ingles[2], creditos),
+                            (opciones_ingles[3], exit_out)]
 
     pg.font.init()
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -1564,6 +1597,32 @@ def main_menu():
 
         pg.display.flip()
         pg.time.delay(10)
+
+def options():
+    if __name__ == '__main__':
+        salir = False
+        opciones = [('Cambiar Idioma',language),
+                    ('Audio', ingles),
+                    ('Regresar',main_menu)]
+
+    pg.font.init()
+    screen = pg.display.set_mode((WIDTH, HEIGHT))
+    fondo = pg.image.load("img/language_menu.png").convert()
+    menu = Menu(opciones,colors.WHITE)
+
+    while not salir:
+        for e in pg.event.get():
+            if e.type == QUIT:
+                salir = True
+                os.sys.exit()
+
+        screen.blit(fondo,(0,0))
+        menu.actualizar()
+        menu.imprimir(screen)
+
+        pg.display.flip()
+        pg.time.delay(10)
+    pg.display.quit()
 
 
 language()

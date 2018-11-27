@@ -3,6 +3,7 @@ import pygame as pg
 TITLE = "A Healthy Adventure | Milledo Dogio"
 
 PLAYER_ACC = 0.6
+ENEMY_ACC = 0.2
 PLAYER_FRICTION = -0.14
 PLAYER_GRAV = 0.8
 PLAYER_JUMP = 20
@@ -12,11 +13,6 @@ HS_FILE = "highscore.txt"
 FPS = 60
 WIDTH = 1024
 HEIGHT = 640
-
-PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40),
-                 (WIDTH / 2 - 50, HEIGHT * 3 / 4, 100, 20),
-                 (150, HEIGHT * 3 / 5,100,20),
-                 (400,HEIGHT * 3 / 7,100,20)]
 
 TILESIZE = 64
 GRIDWIDTH = WIDTH / TILESIZE
