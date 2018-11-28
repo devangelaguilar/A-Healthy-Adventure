@@ -100,13 +100,6 @@ class Joseph(pg.sprite.Sprite):
             self.acc.x = PLAYER_ACC
         if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
             self.jump()
-        if keys[pg.K_m]:
-            proyectil = Proyectil(self.pos.x,self.pos.y)
-            self.game.screen.blit(proyectil.image,(self.pos.x,self.pos.y))
-            # Configuramos el proyectil de forma que esté donde el protagonista
-            # Añadimos el proyectil a la lista
-            self.game.proyectiles.add(proyectil)
-            proyectil.update()
 
         self.acc.x += self.vel.x * PLAYER_FRICTION
         #Ecuaciones de Motricidad
@@ -232,10 +225,12 @@ class Jon_Snow(pg.sprite.Sprite):
         self.acc = vec(0,PLAYER_GRAV)
         keys = pg.key.get_pressed()
 
-        if keys[pg.K_LEFT]:
+        if keys[pg.K_LEFT] or keys[pg.K_a]:
             self.acc.x = -PLAYER_ACC
-        if keys[pg.K_RIGHT]:
+        if keys[pg.K_RIGHT] or keys[pg.K_d]:
             self.acc.x = PLAYER_ACC
+        if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
+            self.jump()
 
         self.acc.x += self.vel.x * PLAYER_FRICTION
         #Ecuaciones de Motricidad
@@ -353,9 +348,9 @@ class Mariana(pg.sprite.Sprite):
         self.acc = vec(0,PLAYER_GRAV)
         keys = pg.key.get_pressed()
 
-        if keys[pg.K_LEFT]:
+        if keys[pg.K_LEFT] or keys[pg.K_a]:
             self.acc.x = -PLAYER_ACC
-        if keys[pg.K_RIGHT]:
+        if keys[pg.K_RIGHT] or keys[pg.K_d]:
             self.acc.x = PLAYER_ACC
         if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
             self.jump()
@@ -445,12 +440,10 @@ class Minion_Depression(pg.sprite.Sprite):
         for frame in self.standing_frames:
             frame.set_colorkey(colors.BLACK)
 
-        self.walking_frames_r = [self.game.spritesheet_minion.get_image(0,0,64,64),
-                        self.game.spritesheet_minion.get_image(64,0,64,64),
-                        self.game.spritesheet_minion.get_image(0,64,64,64),
-                        self.game.spritesheet_minion.get_image(64,64,64,64),
-                        self.game.spritesheet_minion.get_image(0,128,64,64),
-                        self.game.spritesheet_minion.get_image(64,128,64,64)]
+        self.walking_frames_r = [self.game.spritesheet_minion.get_image(64,64,64,64),
+                        self.game.spritesheet_minion.get_image(128,64,64,64),
+                        self.game.spritesheet_minion.get_image(192,64,64,64),
+                        self.game.spritesheet_minion.get_image(0,128,64,64)]
         
         self.walking_frames_l = []
         for frame in self.walking_frames_r:
@@ -482,13 +475,14 @@ class Minion_Depression(pg.sprite.Sprite):
         self.animate()
         self.acc = vec(0,PLAYER_GRAV)
         keys = pg.key.get_pressed()
-        
-        if keys[pg.K_LEFT] or keys[pg.K_a]:
+        if self.pos.x <= self.game.map.width:
             self.acc.x = -ENEMY_ACC
-        if keys[pg.K_RIGHT] or keys[pg.K_d]:
-            self.acc.x = -ENEMY_ACC
-        if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
-            self.acc.x = -ENEMY_ACC
+        elif self.pos.x == 0:
+            self.acc.x = ENEMY_ACC
+        #if self.game.player.pos.x - self.pos.x < 50:
+         #   self.acc.x = ENEMY_ACC
+        #if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
+            #self.acc.x = -ENEMY_ACC
         #if self.pos.x < 0:
          #   self.acc.x = -PLAYER_ACC
         #if self.pos.x > 0:
@@ -507,7 +501,10 @@ class Minion_Depression(pg.sprite.Sprite):
             #self.pos.x = self.game.map.width + self.rect.width / 2
 
         self.rect.midbottom = self.pos
-    
+
+    def mover(self, avance_x, avance_y):
+        self.rect.move_ip(avance_x, avance_y)
+
     def animate(self):
         now = pg.time.get_ticks()
         if self.vel.x != 0:
@@ -845,8 +842,8 @@ class Floor_Depression(pg.sprite.Sprite):
         self.y = y
         self.rect.x = x * TILESIZE
         self.rect.y = y * TILESIZE
-        #if randrange(5) < POW_SPAWN_PCT:
-            #Pow_Pizza(self.game, self)
+        if randrange(15) < POW_SPAWN_PCT:
+            Pow_Coin(self.game, self.rect.x,self.rect.y)
         #if randrange(20) < POW_SPAWN_PCT:
             #Pow_Life(self.game,self)
 
@@ -904,20 +901,17 @@ class Floor(pg.sprite.Sprite):
         self.x = x
         self.y = y
 
-class Proyectil(pg.sprite.Sprite ):  #"heredamos" los métodos de la clase Sprite nativa en pygame
-    def __init__(self, pos_i_x, pos_i_y ): #inicializamos la clase con dos valores, de la posición inicial en "x" y en "y"
-        pg.sprite.Sprite.__init__(self) #inicializamos la clase que heredamos...
-        self.image = pg.image.load("img/Depression/Energy_Ball.png") #asumo, ya la tienes hecha :)
-        self.rect = self.image.get_rect() #obtenemos las "rectas" de nuestra imagen...
-        self.rect.center = (pos_i_x, pos_i_y) #colocamos la imagen en la posición inicial :)
-        #ahora, definiremos la velocidad de nuestra bala :)
-        self.dx = 0   # la velocidad en x 
-        self.dy = -3 # la velocidad en y, recuerda por que es negativa :)
-
-    def update(self):
-        self.rect.move_ip((self.dx, self.dy)) #esto mueve continuamente nuestra bala
-        if self.rect.y < 0 : #esto revisa si la bala sale por la parte superior de la pantalla :)
-            self.kill() #... y la destruye si sale
+class Proyectil(pg.sprite.Sprite):
+    def __init__(self,posx,posy):
+        pg.sprite.Sprite.__init__(self)
+        self.imageProyectil = pg.image.load("img/Depression/Energy_Ball.png")
+        self.rect = self.imageProyectil.get_rect()
+        self.velocidadDisparo = 5
+        self.rect.top = posy
+        self.rect.left = posx
+    
+    #def trayectoria(self):
+        #self.rect.top = 
 
 class Pow_Coin(pg.sprite.Sprite):
     def __init__(self, game, x,y):
@@ -1060,7 +1054,7 @@ class Door(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.type = choice(['door'])
-        self.image = pg.image.load("img/door.png").convert_alpha()
+        self.image = pg.image.load("img/portal.png").convert_alpha()
         self.image.set_colorkey(colors.BLACK)
         self.rect = self.image.get_rect()
         self.x = x

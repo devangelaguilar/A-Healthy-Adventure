@@ -27,6 +27,14 @@ niveles = ['Depresion',
             'ETS',
             'Regresar al menu principal']
 
+
+niveles_ingles = ['Depression',
+            'Drugs',
+            'Food Disorders',
+            'Obesity',
+            'STD',
+            'Back To Menu']
+
 pause = False
 idioma = 0
 
@@ -59,7 +67,6 @@ class Opcion:
     def activar(self):
         self.funcion_asignada()
 
-
 class Cursor:
 
     def __init__(self, x, y, dy):
@@ -80,7 +87,6 @@ class Cursor:
 
     def imprimir(self, screen):
         screen.blit(self.image, self.rect)
-
 
 class Menu:
     os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -239,6 +245,8 @@ class Depression_Level:
         self.map = Map(os.path.join(self.game_folder,'maps/Depression - map_1.txt'))
         self.spritesheet = Spritesheet(os.path.join(self.img_folder,JOSEPH_SPRITESHEET))
         self.spritesheet_minion = Spritesheet(os.path.join(self.img_folder,MINION_DEPRESSION_SPRITESHEET))
+        self.energy_ball = pg.image.load("img/Depression/Energy_Ball.png").convert_alpha()
+        self.energy = self.energy_ball.get_rect()
         self.heart_anim = Spritesheet(os.path.join(self.img_folder,HEART_ANIM))
         self.heart_ly_anim = Spritesheet(os.path.join(self.img_folder,HEART_LY_ANIM))
         self.background = pg.image.load("img/Depression/Scenario.png").convert_alpha()
@@ -249,6 +257,7 @@ class Depression_Level:
         #New game.
         self.score = 0
         self.lifes = 3
+        self.volumen = 1
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
         self.powerups = pg.sprite.Group()
@@ -281,9 +290,9 @@ class Depression_Level:
                 if tile == 'M':
                     self.minion = Minion_Depression(self,col,row)
         pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
-        pg.mixer.music.set_volume(1);
+        pg.mixer.music.set_volume(self.volumen)
         self.camera = Camara(self.map.width,self.map.height)
-        self.run()
+        self.show_start_screen()
 
 
     def run(self):
@@ -293,8 +302,8 @@ class Depression_Level:
         while self.playing:
             self.clock.tick(FPS)
             self.events()
-            self.draw()
             self.update()
+            self.draw()
         pg.mixer.music.fadeout(1500)
 
     def update(self):
@@ -309,15 +318,20 @@ class Depression_Level:
             if hits:
                 self.player.pos.y = hits[0].rect.top + 1
                 self.player.vel.y = 0
-            hit_enemy = pg.sprite.collide_rect(self.player,self.minion)
+
+            hit_enemy = pg.sprite.spritecollide(self.player,self.enemies,True)
             if hit_enemy:
-                self.lifes -= 0.5
+                self.lifes -= 1
+                self.player.jump()
+                print(self.lifes)
+                self.update_lifes()
+
         if self.minion.vel.y > 0:
-            hits = pg.sprite.spritecollide(self.minion, self.walls, False)
-            if hits:
-                self.minion.pos.y = hits[0].rect.top + 1
+            hits_minion = pg.sprite.spritecollide(self.minion, self.walls, False)
+            if hits_minion:
+                self.minion.pos.y = hits_minion[0].rect.top + 1
                 self.minion.vel.y = 0
-            col_hit = pg.sprite.spritecollide(self.minion,self.proyectiles,True)
+
         pow_hits = pg.sprite.spritecollide(self.player, self.powerups, True)
 
             
@@ -326,38 +340,13 @@ class Depression_Level:
                 self.score += 10
                 self.player.jumping = False
             elif pow.type == 'life':
-                self.lifes += 0.5
-                if self.lifes == 0.5:
-                    self.heart = pg.image.load("img/half_heart.png")
-                elif self.lifes == 1:
-                    self.heart = pg.image.load("img/heart.png")
-                elif self.lifes == 1.5:
-                    self.heart_2 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 2:
-                    self.heart_2 = pg.image.load("img/heart.png")
-                elif self.lifes == 2.5:
-                    self.heart_3 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 3:
-                    self.heart_3 = pg.image.load("img/heart.png")
+                self.lifes += 1
+                self.update_lifes()
             elif pow.type == 'minus_life':
-                self.lifes -= 0.5
-                if self.lifes == 0:
-                    self.heart = pg.image.load("img/no_heart.png")
-                if self.lifes == 0.5:
-                    self.heart = pg.image.load("img/half_heart.png")
-                elif self.lifes == 1:
-                    self.heart = pg.image.load("img/heart.png")
-                elif self.lifes == 1.5:
-                    self.heart_2 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 2:
-                    self.heart_2 = pg.image.load("img/heart.png")
-                elif self.lifes == 2.5:
-                    self.heart_3 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 3:
-                    self.heart_3 = pg.image.load("img/heart.png")
+                self.lifes -= 1
+                self.update_lifes()
             elif pow.type == 'door':
                 self.endlevel()
-        self.animate_text_ly()
         self.camera.update(self.player)
 
     def events(self):
@@ -368,12 +357,11 @@ class Depression_Level:
                     self.playing = False
                 self.running = False
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE:
-                    pg.display.toggle_fullscreen()
-                if event.key == pg.K_p:
+                if event.key == pg.K_p or event.key == pg.K_ESCAPE:
                     global pause
                     pause = True
                     self.pause()
+
 
     def draw(self):
         #Dibujar pantalla durante el loop.
@@ -392,14 +380,40 @@ class Depression_Level:
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
         pg.display.flip()
 
-    def animate_text_ly(self):
-        pass
+    def update_lifes(self):
+        if self.lifes == 0:
+            self.quitgame()
+        if self.lifes == 1:
+            self.heart = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/no_heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/no_heart.png").convert_alpha()
+        if self.lifes == 2:
+            self.heart_1 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/no_heart.png").convert_alpha()
+        if self.lifes == 3:
+            self.heart_1 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
 
     def load_arrays(self):
         pass
 
     def show_start_screen(self):
-        pass
+        screen_load = True
+        if idioma == 0:
+            self.load_screen_1 = pg.image.load("img/Depression/load_screen_level_1.png").convert_alpha()
+        else:
+            self.load_screen_1 = pg.image.load("img/Depression/load_screen_level_1_english.png").convert_alpha()
+        while screen_load:
+            self.screen.blit(self.load_screen_1,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    os.sys.exit()
+            pg.display.update()
+            pg.time.delay(3000)
+            self.run()
 
 
     def show_go_screen(self):
@@ -410,8 +424,10 @@ class Depression_Level:
     def pause(self):
         pg.mixer.music.stop()
         reloj = pg.time.Clock()
-        self.load_screen = pg.image.load("img/pause_menu.png").convert_alpha()
-        self.load_screen.set_colorkey(colors.WHITE)
+        if idioma == 0:
+            self.load_screen = pg.image.load("img/Depression/pause_menu.png").convert_alpha()
+        else:
+            self.load_screen = pg.image.load("img/Depression/pause_menu_english.png").convert_alpha()
         while pause:
             self.screen.blit(self.load_screen,(0,0))
             for event in pg.event.get():
@@ -423,6 +439,8 @@ class Depression_Level:
                         self.unpased()
                     if event.key == pg.K_s:
                         select_level()
+                    if event.key == pg.K_q:
+                        self.quitgame()
             pg.display.update()
             reloj.tick(FPS)
     
@@ -447,10 +465,7 @@ class Depression_Level:
         screen_load = True
         self.load_screen = pg.image.load("img/Depression/depresion_screen_1.png")
         while screen_load:
-            self.screen.fill(colors.WHITE)
             self.screen.blit(self.load_screen,(0,0))
-            self.draw_text('Joystix.ttf', 'Area Completeda!', 18, colors.BLACK, WIDTH / 32 * 16, 182)
-            self.draw_text('Joystix.ttf', 'Felicidades!', 18, colors.BLACK, WIDTH / 32 * 16, 242)
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
@@ -497,7 +512,7 @@ class Depression_Level_2:
             except:
                 self.highscore = 0
         self.map = Map(os.path.join(game_folder,'maps/Depression - map_2.txt'))
-        self.spritesheet = Spritesheet(os.path.join(img_folder,JOSEPH_SPRITESHEET_2))
+        self.spritesheet = Spritesheet(os.path.join(img_folder,JOSEPH_SPRITESHEET_50))
         self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
         self.background = pg.image.load("img/Depression/Scenario.png").convert_alpha()
@@ -600,8 +615,7 @@ class Depression_Level_2:
                 elif self.lifes == 3:
                     self.heart_3 = pg.image.load("img/heart.png")
             elif pow.type == 'door':
-                self.quitgame()
-        self.animate_text_ly()
+                self.endlevel()
         self.camera.update(self.player)
 
     def events_depression(self):
@@ -612,8 +626,10 @@ class Depression_Level_2:
                     self.playing = False
                 self.running = False
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE:
-                    self.quitgame()
+                if event.key == pg.K_ESCAPE or event.key == pg.K_p:
+                    global pause
+                    pause = True
+                    self.pause()
 
     def draw_depression(self):
         #Dibujar pantalla durante el loop.
@@ -622,18 +638,59 @@ class Depression_Level_2:
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
         self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
         if idioma == 0:
-            self.draw_text('Joystix.ttf', 'Depresion: 75%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('Joystix.ttf', 'Depresion: 50%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
             self.draw_text('Joystix.ttf', 'Depresion - Nivel 2', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         else:
-            self.draw_text('Joystix.ttf', 'Depression: 75%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('Joystix.ttf', 'Depression: 50%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
             self.draw_text('Joystix.ttf', 'Depression - Level 2', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
         pg.display.flip()
 
-    def animate_text_ly(self):
-        pass
+    def update_lifes(self):
+        if self.lifes == 0:
+            self.quitgame()
+        if self.lifes == 1:
+            self.heart = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/no_heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/no_heart.png").convert_alpha()
+        if self.lifes == 2:
+            self.heart_1 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/no_heart.png").convert_alpha()
+        if self.lifes == 3:
+            self.heart_1 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
+
+    def pause(self):
+        pg.mixer.music.stop()
+        reloj = pg.time.Clock()
+        if idioma == 0:
+            self.load_screen = pg.image.load("img/Depression/pause_menu.png").convert_alpha()
+        else:
+            self.load_screen = pg.image.load("img/Depression/pause_menu_english.png").convert_alpha()
+        while pause:
+            self.screen.blit(self.load_screen,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_c:
+                        self.unpased()
+                    if event.key == pg.K_s:
+                        select_level()
+                    if event.key == pg.K_q:
+                        self.quitgame()
+            pg.display.update()
+            reloj.tick(FPS)
+    
+    def unpased(self):
+        pg.mixer.music.play()
+        global pause
+        pause = False
 
     def load_arrays(self):
         pass
@@ -657,16 +714,20 @@ class Depression_Level_2:
         pg.quit()
         quit()
 
-    def pass_level(self):
-        d_l_2 = Depression_Level_2()
-        d_l_2.show_start_screen()
-        
-        while d_l_2.running:
-
-            d_l_2.new_game()
-            d_l_2.show_go_screen()
-
-        pg.quit()
+    def endlevel(self):
+        pg.mixer.music.stop()
+        screen_load = True
+        self.load_screen = pg.image.load("img/Depression/depresion_screen_2.png")
+        while screen_load:
+            self.screen.blit(self.load_screen,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_RETURN:
+                        select_level()
+            pg.display.update()
 
 class Drugs_level:
     def __init__(self):
@@ -703,7 +764,7 @@ class Drugs_level:
         self.breath_player = Spritesheet(os.path.join(img_folder,BREATH_DRUGS))
         self.walk_player = Spritesheet(os.path.join(img_folder,WALK_DRUGS))
         self.snd_dir = os.path.join(self.dir, 'snd')
-        self.background = pg.image.load("img/Fondo Drogas.png").convert_alpha()
+        self.background = pg.image.load("img/Fondo_Drogas.png").convert_alpha()
     
 
     def new(self):
@@ -736,7 +797,7 @@ class Drugs_level:
         #pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
         #pg.mixer.music.set_volume(1);
         self.camera = Camara(self.map.width,self.map.height)
-        self.run()
+        self.show_start_screen()
 
 
     def run(self):
@@ -767,52 +828,44 @@ class Drugs_level:
                 self.score += 10
                 self.player.jumping = False
             elif pow.type == 'life':
-                self.lifes += 0.5
-                if self.lifes == 0.5:
-                    self.heart = pg.image.load("img/half_heart.png")
-                elif self.lifes == 1:
-                    self.heart = pg.image.load("img/heart.png")
-                elif self.lifes == 1.5:
-                    self.heart_2 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 2:
-                    self.heart_2 = pg.image.load("img/heart.png")
-                elif self.lifes == 2.5:
-                    self.heart_3 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 3:
-                    self.heart_3 = pg.image.load("img/heart.png")
+                self.lifes += 1
+                self.update_lifes()
             elif pow.type == 'minus_life':
-                self.lifes -= 0.5
-                if self.lifes == 0:
-                    self.heart = pg.image.load("img/no_heart.png")
-                if self.lifes == 0.5:
-                    self.heart = pg.image.load("img/half_heart.png")
-                elif self.lifes == 1:
-                    self.heart = pg.image.load("img/heart.png")
-                elif self.lifes == 1.5:
-                    self.heart_2 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 2:
-                    self.heart_2 = pg.image.load("img/heart.png")
-                elif self.lifes == 2.5:
-                    self.heart_3 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 3:
-                    self.heart_3 = pg.image.load("img/heart.png")
+                self.lifes -= 1
+                self.update_lifes()
             elif pow.type == 'door':
                 self.endlevel()
-        self.animate_text_ly()
         self.camera.update(self.player)
 
     def events(self):
         #Eventos del loop.
-        for event in pg.event.get():
+         for event in pg.event.get():
             if event.type == pg.QUIT:
                 if self.playing:  
                     self.playing = False
                 self.running = False
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_SPACE or event.key == pg.K_UP:
-                    self.player.jump()
-                if event.key == pg.K_ESCAPE:
-                    self.quitgame()
+                if event.key == pg.K_p or event.key == pg.K_ESCAPE:
+                    global pause
+                    pause = True
+                    self.pause()
+
+    def update_lifes(self):
+        if self.lifes == 0:
+            self.quitgame()
+        if self.lifes == 1:
+            self.heart = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/no_heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/no_heart.png").convert_alpha()
+        if self.lifes == 2:
+            self.heart_1 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/no_heart.png").convert_alpha()
+        if self.lifes == 3:
+            self.heart_1 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
+
 
     def draw(self):
         #Dibujar pantalla durante el loop.
@@ -839,12 +892,28 @@ class Drugs_level:
         pass
 
     def show_start_screen(self):
-        pass
+        screen_load = True
+        if idioma == 0:
+            self.load_screen_1 = pg.image.load("img/load_screen_level_1_drogas.png").convert_alpha()
+        else:
+            self.load_screen_1 = pg.image.load("img/Depression/load_screen_level_1_english.png").convert_alpha()
+        while screen_load:
+            self.screen.blit(self.load_screen_1,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    os.sys.exit()
+            pg.display.update()
+            pg.time.delay(3000)
+            self.run()
 
     def show_go_screen(self):
         #Muestra la pantalla de game over. 
         pass
-
+    
+    def quitgame(self):
+        pg.display.quit()
+        os.sys.exit()
 
     def draw_text(self, font_name,text, size, color, x, y):
         font = pg.font.Font(font_name, size)
@@ -853,11 +922,38 @@ class Drugs_level:
         text_rect.midtop = (x, y)
         self.screen.blit(text_surface, text_rect)
     
+    def pause(self):
+        pg.mixer.music.stop()
+        reloj = pg.time.Clock()
+        if idioma == 0:
+            self.load_screen = pg.image.load("img/pause_menu_drugs.png").convert_alpha()
+        else:
+            self.load_screen = pg.image.load("img/pause_menu_drugs_english.png").convert_alpha()
+        while pause:
+            self.screen.blit(self.load_screen,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_c:
+                        self.unpased()
+                    if event.key == pg.K_s:
+                        select_level()
+                    if event.key == pg.K_q:
+                        self.quitgame()
+            pg.display.update()
+            reloj.tick(FPS)
+    
+    def unpased(self):
+        pg.mixer.music.play()
+        global pause
+        pause = False
+    
     def endlevel(self):
         screen_load = True
-        self.load_screen = pg.image.load("img/Depression/depresion_screen_1.png")
+        self.load_screen = pg.image.load("img/drugs_screen_1.png").convert_alpha()
         while screen_load:
-            self.screen.fill(colors.WHITE)
             self.screen.blit(self.load_screen,(0,0))
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -865,15 +961,7 @@ class Drugs_level:
                     sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:
-                        a_l = Anorexia_Level()
-                        a_l.show_start_screen()
-                        
-                        while a_l.running:
-
-                            a_l.new_game()
-                            a_l.show_go_screen()
-
-                        pg.quit()
+                       select_level()
             pg.display.update()
 
 class Anorexia_Level:
@@ -906,9 +994,9 @@ class Anorexia_Level:
                 self.highscore = 0
         self.map = Map(os.path.join(game_folder,'maps/Anorexia - map_1.txt'))
         self.spritesheet_mariana = Spritesheet(os.path.join(img_folder,MARIANA_SPRITESHEET))
-        #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
-        #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/Fondo Anorexia.png").convert_alpha()
+        self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
+        self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
+        self.background = pg.image.load("img/Fondo_Anorexia.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -937,8 +1025,8 @@ class Anorexia_Level:
                     Pow_Life(self,col,row)
                 if tile == '4':
                     Minus_Life(self,col,row)
-                #if tile == '5':
-                    #Pow_Coin(self,col,row)
+                if tile == '5':
+                    Pow_Coin(self,col,row)
                 if tile == 'P':
                     self.player = Mariana(self, col, row)
                 if tile == 'D':
@@ -978,50 +1066,27 @@ class Anorexia_Level:
                 self.score += 10
                 self.player.jumping = False
             elif pow.type == 'life':
-                self.lifes += 0.5
-                if self.lifes == 0.5:
-                    self.heart = pg.image.load("img/half_heart.png")
-                elif self.lifes == 1:
-                    self.heart = pg.image.load("img/heart.png")
-                elif self.lifes == 1.5:
-                    self.heart_2 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 2:
-                    self.heart_2 = pg.image.load("img/heart.png")
-                elif self.lifes == 2.5:
-                    self.heart_3 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 3:
-                    self.heart_3 = pg.image.load("img/heart.png")
+                self.lifes += 1
+                self.update_lifes()
             elif pow.type == 'minus_life':
-                self.lifes -= 0.5
-                if self.lifes == 0:
-                    self.heart = pg.image.load("img/no_heart.png")
-                if self.lifes == 0.5:
-                    self.heart = pg.image.load("img/half_heart.png")
-                elif self.lifes == 1:
-                    self.heart = pg.image.load("img/heart.png")
-                elif self.lifes == 1.5:
-                    self.heart_2 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 2:
-                    self.heart_2 = pg.image.load("img/heart.png")
-                elif self.lifes == 2.5:
-                    self.heart_3 = pg.image.load("img/half_heart.png")
-                elif self.lifes == 3:
-                    self.heart_3 = pg.image.load("img/heart.png")
+                self.lifes -= 1
+                self.update_lifes()
             elif pow.type == 'door':
-                self.quitgame()
-        self.animate_text_ly()
+                self.endlevel()
         self.camera.update(self.player)
 
     def events(self):
         #Eventos del loop.
-        for event in pg.event.get():
+         for event in pg.event.get():
             if event.type == pg.QUIT:
                 if self.playing:  
                     self.playing = False
                 self.running = False
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE:
-                   self.quitgame()
+                if event.key == pg.K_p or event.key == pg.K_ESCAPE:
+                    global pause
+                    pause = True
+                    self.pause()
 
     def draw(self):
         #Dibujar pantalla durante el loop.
@@ -1038,6 +1103,23 @@ class Anorexia_Level:
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
         pg.display.flip()
 
+    def update_lifes(self):
+        if self.lifes == 0:
+            self.quitgame()
+        if self.lifes == 1:
+            self.heart = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/no_heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/no_heart.png").convert_alpha()
+        if self.lifes == 2:
+            self.heart_1 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/no_heart.png").convert_alpha()
+        if self.lifes == 3:
+            self.heart_1 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
+            self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
+
+
     def animate_text_ly(self):
         pass
 
@@ -1051,6 +1133,48 @@ class Anorexia_Level:
     def show_go_screen(self):
         #Muestra la pantalla de game over. 
         pass
+
+    def pause(self):
+        pg.mixer.music.stop()
+        reloj = pg.time.Clock()
+        if idioma == 0:
+            self.load_screen = pg.image.load("img/pause_menu_drugs.png").convert_alpha()
+        else:
+            self.load_screen = pg.image.load("img/pause_menu_drugs_english.png").convert_alpha()
+        while pause:
+            self.screen.blit(self.load_screen,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_c:
+                        self.unpased()
+                    if event.key == pg.K_s:
+                        select_level()
+                    if event.key == pg.K_q:
+                        self.quitgame()
+            pg.display.update()
+            reloj.tick(FPS)
+    
+    def unpased(self):
+        pg.mixer.music.play()
+        global pause
+        pause = False
+    
+    def endlevel(self):
+        screen_load = True
+        self.load_screen = pg.image.load("img/anorexia_screen_1.png").convert_alpha()
+        while screen_load:
+            self.screen.blit(self.load_screen,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_RETURN:
+                       select_level()
+            pg.display.update()
 
     def draw_text(self, font_name,text, size, color, x, y):
         font = pg.font.Font(font_name, size)
@@ -1095,7 +1219,7 @@ class Obesidad_Level:
         self.spritesheet_don_juan = Spritesheet(os.path.join(img_folder,JUAN_SPRITESHEET))
         #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/Estadio_Obesity.png").convert_alpha()
+        self.background = pg.image.load("img/Fondo_Obesidad.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -1279,7 +1403,7 @@ class ETS_Level:
         self.spritesheet_macho = Spritesheet(os.path.join(img_folder,MACHO_SPRITESHEET))
         #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/Fondo ETS.png").convert_alpha()
+        self.background = pg.image.load("img/Fondo_ETS.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -1434,7 +1558,6 @@ class ETS_Level:
 
 def depression():
     d_l = Depression_Level()
-    d_l.show_start_screen()
         
     while d_l.running:
 
@@ -1446,13 +1569,23 @@ def depression():
 def select_level():
     if __name__ == '__main__':
         salir = False
-        opcion = [(niveles[0], depression),
-                    (niveles[1], drugs),
-                    (niveles[2], food_disorders),
-                    (niveles[3], obesity),
-                    (niveles[4],ets),
-                    (niveles[5],main_menu)]
+        opcion = [('Test',Drugs_level),
+                    ('Hi',Depression_Level)]
 
+        if idioma == 0:
+            opcion = [(niveles[0], depression),
+                        (niveles[1], drugs),
+                        (niveles[2], food_disorders),
+                        (niveles[3], test_level),
+                        (niveles[4],test_level),
+                        (niveles[5],main_menu)]
+        if idioma == 1:
+            opcion = [(niveles_ingles[0], depression),
+                        (niveles_ingles[1], drugs),
+                        (niveles_ingles[2], food_disorders),
+                        (niveles_ingles[3], test_level),
+                        (niveles_ingles[4],test_level),
+                        (niveles_ingles[5],main_menu)]
 
     pg.font.init()
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -1476,7 +1609,6 @@ def select_level():
 
 def drugs():
     g = Drugs_level()
-    g.show_start_screen()
         
     while g.running:
         g.new()
@@ -1527,6 +1659,8 @@ def exit_out():
     import sys
     sys.exit(0)
 
+def test_level():
+    pass
 
 def language():
     if __name__ == '__main__':
@@ -1564,10 +1698,11 @@ def ingles():
     idioma = 1
     main_menu()
 
-
 def main_menu():
     if __name__ == '__main__':
         salir = False
+        opciones = [('Test',Drugs_level),
+                    ('Hi',Depression_Level)]
         if idioma == 0:
             opciones = [  (opciones_espanol[0], select_level),
                             (opciones_espanol[1], options),
@@ -1601,10 +1736,14 @@ def main_menu():
 def options():
     if __name__ == '__main__':
         salir = False
-        opciones = [('Cambiar Idioma',language),
-                    ('Audio', ingles),
-                    ('Regresar',main_menu)]
-
+        if idioma == 0:
+            opciones = [('Cambiar Idioma',language),
+                        ('Audio', ingles),
+                        ('Regresar',main_menu)]
+        if idioma == 1:
+            opciones = [('Change Language',language),
+                        ('Audio', ingles),
+                        ('Back',main_menu)]
     pg.font.init()
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     fondo = pg.image.load("img/language_menu.png").convert()
@@ -1623,6 +1762,5 @@ def options():
         pg.display.flip()
         pg.time.delay(10)
     pg.display.quit()
-
 
 language()

@@ -25,7 +25,8 @@ PLAYER_HIT_RECT = pg.Rect(0, 0, 10, 10)
 POW_SPAWN_PCT = 1
 
 JOSEPH_SPRITESHEET = 'Joseph_Spritesheet.png'
-JOSEPH_SPRITESHEET_2 = 'Sad Boy 75%.png'
+JOSEPH_SPRITESHEET_75 = 'Sad Boy 75%.png'
+JOSEPH_SPRITESHEET_50 = 'Sad Boy 50%.png'
 MINION_DEPRESSION_SPRITESHEET = 'Enemies/Minion - Spritesheet.png'
 MARIANA_SPRITESHEET = 'Mariana_Anorexia.png'
 JUAN_SPRITESHEET = 'final_deportista_obesidad.png'
