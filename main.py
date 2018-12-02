@@ -1032,7 +1032,7 @@ class Anorexia_Level:
                 if tile == 'D':
                     Door(self,col,row)
         pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
-        pg.mixer.music.set_volume(1);
+        pg.mixer.music.set_volume(0.6)
         self.camera = Camara(self.map.width,self.map.height)
         self.run()
 

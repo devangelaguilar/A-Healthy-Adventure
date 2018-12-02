@@ -52,6 +52,7 @@ class Joseph(pg.sprite.Sprite):
         self.vel = vec(0, 0)
         self.pos = vec(x, y) * TILESIZE
         self.rot = 0
+        self.sonido = pg.mixer.Sound("snd/walking.wav")
 
     def load_images(self):
         self.standing_frames = [self.game.spritesheet.get_image(0,0,64,64),
@@ -133,6 +134,8 @@ class Joseph(pg.sprite.Sprite):
 
         # show walk animation
         if self.walking:
+            self.sonido.set_volume(0.2)
+            self.sonido.play()
             if now - self.last_update > 180:
                 self.last_update = now
                 self.current_frame = (self.current_frame + 1) % len(self.walking_frames_l)
@@ -143,6 +146,8 @@ class Joseph(pg.sprite.Sprite):
                     self.image = self.walking_frames_l[self.current_frame]
                 self.rect = self.image.get_rect()
                 self.rect.bottom = bottom
+        else:
+            self.sonido.stop()
             
         # show jump animation
         if self.jumping:
