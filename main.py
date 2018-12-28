@@ -368,9 +368,9 @@ class Depression_Level:
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
-        self.draw_text('Roboto-Light.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
+        self.draw_text('VCR_MONO.ttf', '= ' + str(self.score), 20, colors.WHITE, WIDTH / 32 * 27, 22)
         if idioma == 0:
-            self.draw_text('Roboto-Light.ttf', 'Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('VCR_MONO.ttf', 'Depresion: 100%', 18, colors.WHITE, WIDTH / 32 * 25, 62)
             self.draw_text('Roboto-Light.ttf', 'Depresion - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         else:
             self.draw_text('Roboto-Light.ttf', 'Depression: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
