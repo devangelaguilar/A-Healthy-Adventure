@@ -368,13 +368,13 @@ class Depression_Level:
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
-        self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
+        self.draw_text('Roboto-Light.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
         if idioma == 0:
-            self.draw_text('Joystix.ttf', 'Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
-            self.draw_text('Joystix.ttf', 'Depresion - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+            self.draw_text('Roboto-Light.ttf', 'Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('Roboto-Light.ttf', 'Depresion - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         else:
-            self.draw_text('Joystix.ttf', 'Depression: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
-            self.draw_text('Joystix.ttf', 'Depression - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+            self.draw_text('Roboto-Light.ttf', 'Depression: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('Roboto-Light.ttf', 'Depression - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -422,6 +422,7 @@ class Depression_Level:
     
 
     def pause(self):
+        self.pos_song = pg.mixer.music.get_pos()
         pg.mixer.music.stop()
         reloj = pg.time.Clock()
         if idioma == 0:
@@ -445,6 +446,7 @@ class Depression_Level:
             reloj.tick(FPS)
     
     def unpased(self):
+        pg.mixer.music.set_pos(self.pos_song)
         pg.mixer.music.play()
         global pause
         pause = False

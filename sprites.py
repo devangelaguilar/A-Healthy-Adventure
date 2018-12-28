@@ -100,6 +100,7 @@ class Joseph(pg.sprite.Sprite):
         if keys[pg.K_RIGHT] or keys[pg.K_d]:
             self.acc.x = PLAYER_ACC
         if keys[pg.K_SPACE] or keys[pg.K_UP] or keys[pg.K_w]:
+            self.jumping = True
             self.jump()
 
         self.acc.x += self.vel.x * PLAYER_FRICTION
@@ -134,7 +135,7 @@ class Joseph(pg.sprite.Sprite):
 
         # show walk animation
         if self.walking:
-            self.sonido.set_volume(0.2)
+            self.sonido.set_volume(0.1)
             self.sonido.play()
             if now - self.last_update > 180:
                 self.last_update = now
@@ -150,8 +151,8 @@ class Joseph(pg.sprite.Sprite):
             self.sonido.stop()
             
         # show jump animation
-        if self.jumping:
-            if now - self.last_update > 180:
+        if self.jumping and not self.walking:
+            if now - self.last_update > 80:
                 self.last_update = now
                 self.current_frame = (self.current_frame + 1) % len(self.jumping_frames)
                 bottom = self.rect.bottom
@@ -1060,6 +1061,278 @@ class Door(pg.sprite.Sprite):
         self.game = game
         self.type = choice(['door'])
         self.image = pg.image.load("img/portal.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Brocoli(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Brocoli.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Cafe(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Cafe.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Camaron(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Camaron.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Pollo(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Pollo.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Chocolate(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['minus_coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Chocolate.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Chorizo(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['minus_coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Chrizo.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Cuerno(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Cuerno.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Filete(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Filete.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Papitas(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['minus_coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Papitas.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class HotDog(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['minus_coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Hot_Dog.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Huevos(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Huevos.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Paleta(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['minus_coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Paleta.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Palomitas(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['minus_coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Palomitas.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Pizza(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['minus_coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Pizza.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Refresco(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['minus_coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Refresco.png").convert_alpha()
+        self.image.set_colorkey(colors.BLACK)
+        self.rect = self.image.get_rect()
+        self.x = x
+        self.y = y
+        self.rect.x = x * TILESIZE
+        self.rect.y = y * TILESIZE
+
+class Ensalada(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.groups = game.all_sprites, game.powerups
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.type = choice(['coin'])
+        self.current_frame = 0
+        self.last_update = 0
+        #self.load_images()
+        self.image = pg.image.load("img/Food/Ensalada.png").convert_alpha()
         self.image.set_colorkey(colors.BLACK)
         self.rect = self.image.get_rect()
         self.x = x
