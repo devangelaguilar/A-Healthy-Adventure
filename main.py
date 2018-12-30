@@ -9,10 +9,10 @@ import colors
 from random import randrange
 import datetime
 
-opciones_espanol = ['Jugar',
-                    'Opciones',
-                    'Acerca de',
-                    'Salir']
+opciones_espanol = ['',
+                    '',
+                    '',
+                    '']
                     
 
 opciones_ingles = ['Play',
@@ -95,11 +95,11 @@ class Menu:
         self.opciones = []
         pg.display.set_caption(TITLE)
         fuente = pg.font.Font('Joystix.ttf', 25)
-        x = WIDTH / 5 * 2
-        y = HEIGHT / 2
+        x = WIDTH
+        y = HEIGHT
         igualdad= 1
 
-        self.cursor = Cursor(x - 40, y, 55)
+        self.cursor = Cursor(x - 1000, y - 375, 55)
 
         for titulo, funcion in opciones:
             self.opciones.append(Opcion(fuente,text_color,titulo, x, y, igualdad, funcion))
@@ -1690,6 +1690,22 @@ def language():
         pg.time.delay(10)
     pg.display.quit()
 
+def main_screen():
+        screen = pg.display.set_mode((WIDTH, HEIGHT))
+        main_screen = True
+        screen_main = pg.image.load("img/main_screen.png")
+        while main_screen:
+            screen.blit(screen_main,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_RETURN:
+                        language()
+                        pg.quit()
+            pg.display.update()
+
 def espanol():
     global idioma
     idioma = 0
@@ -1718,7 +1734,7 @@ def main_menu():
 
     pg.font.init()
     screen = pg.display.set_mode((WIDTH, HEIGHT))
-    fondo = pg.image.load("img/main_menu.png").convert()
+    fondo = pg.image.load("img/main_menu_ver_2.png").convert()
     menu = Menu(opciones,colors.WHITE)
 
     while not salir:
