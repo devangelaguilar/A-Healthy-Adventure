@@ -291,22 +291,22 @@ class Depression_Level:
                     Door(self,col,row)
                 if tile == 'M':
                     self.minion = Minion_Depression(self,col,row)
-        pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
-        pg.mixer.music.set_volume(self.volumen)
+        #pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
+        #pg.mixer.music.set_volume(self.volumen)
         self.camera = Camara(self.map.width,self.map.height)
         self.show_start_screen()
 
 
     def run(self):
         #Loop Principal.
-        pg.mixer.music.play(loops=-1)
+        #pg.mixer.music.play(loops=-1)
         self.playing = True
         while self.playing:
             self.clock.tick(FPS)
             self.events()
             self.update()
             self.draw()
-        pg.mixer.music.fadeout(1500)
+        #pg.mixer.music.fadeout(1500)
 
     def update(self):
         #Update para el loop.
@@ -1706,7 +1706,7 @@ def main_screen():
                     sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:
-                        language()
+                        main_menu()
                         pg.quit()
             pg.display.update()
 
@@ -1785,4 +1785,4 @@ def options():
         pg.time.delay(10)
     pg.display.quit()
 
-language()
+main_screen()
