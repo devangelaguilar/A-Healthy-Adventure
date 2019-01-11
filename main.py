@@ -250,6 +250,8 @@ class Depression_Level:
         self.heart_anim = Spritesheet(os.path.join(self.img_folder,HEART_ANIM))
         self.heart_ly_anim = Spritesheet(os.path.join(self.img_folder,HEART_LY_ANIM))
         self.background = pg.image.load("img/Depression/Scenario.png").convert_alpha()
+        self.top_bar = pg.image.load("img/Depression/top_bar.png").convert_alpha()
+        self.jos = pg.image.load("img/Depression/Joseph.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -309,7 +311,7 @@ class Depression_Level:
     def update(self):
         #Update para el loop.
         self.screen.fill(colors.WHITE)
-        self.screen.blit(self.background, (0,0))
+        self.screen.blit(self.background, (0,50))
         self.all_sprites.update()
         self.powerups.update()
         self.enemies.update()
@@ -365,13 +367,15 @@ class Depression_Level:
 
     def draw(self):
         #Dibujar pantalla durante el loop.
+        self.screen.blit(self.top_bar,(0,0))
+        self.screen.blit(self.jos,(992,5))
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
-        self.draw_text('VCR_MONO.ttf', '= ' + str(self.score), 20, colors.WHITE, WIDTH / 32 * 27, 22)
+        self.draw_text('Joystix.ttf', '= ' + str(self.score), 14, colors.WHITE, WIDTH / 32 * 27, 22)
         if idioma == 0:
-            self.draw_text('VCR_MONO.ttf', 'Depresion: 100%', 18, colors.WHITE, WIDTH / 32 * 25, 62)
-            self.draw_text('Roboto-Light.ttf', 'Depresion - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+            self.draw_text('Joystix.ttf', 'Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
+            self.draw_text('Joystix.ttf', 'Depresion - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         else:
             self.draw_text('Roboto-Light.ttf', 'Depression: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
             self.draw_text('Roboto-Light.ttf', 'Depression - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
