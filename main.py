@@ -294,6 +294,8 @@ class Depression_Level:
         #pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
         #pg.mixer.music.set_volume(self.volumen)
         self.camera = Camara(self.map.width,self.map.height)
+        self.pos_x = 0
+        self.pos_y = 0
         self.show_start_screen()
 
 
@@ -349,6 +351,10 @@ class Depression_Level:
                 self.update_lifes()
             elif pow.type == 'door':
                 self.endlevel()
+        if self.pos_y >= 1500:
+            self.endlevel()
+        self.pos_x = self.player.pos.x
+        self.pos_y = self.player.pos.y
         self.camera.update(self.player)
 
     def events(self):
@@ -382,6 +388,8 @@ class Depression_Level:
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
+        self.draw_text('Roboto-Light.ttf', str(self.pos_x), 12, colors.WHITE, WIDTH / 32 * 16, 240)
+        self.draw_text('Roboto-Light.ttf', str(self.pos_y), 12, colors.WHITE, WIDTH / 32 * 16, 260)
         pg.display.flip()
 
     def update_lifes(self):
@@ -450,8 +458,8 @@ class Depression_Level:
             reloj.tick(FPS)
     
     def unpased(self):
-        pg.mixer.music.set_pos(self.pos_song)
-        pg.mixer.music.play()
+       # pg.mixer.music.set_pos(self.pos_song)
+        #pg.mixer.music.play()
         global pause
         pause = False
 
