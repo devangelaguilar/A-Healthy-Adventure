@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # encoding: latin1
+import sys
+
 import pygame as pg
 import os
 from pygame.locals import *
