@@ -1076,7 +1076,7 @@ class Brocoli(pg.sprite.Sprite):
         self.type = choice(['coin'])
         self.current_frame = 0
         self.last_update = 0
-        #self.load_images()
+        # self.load_images()
         self.image = pg.image.load("img/Food/Brocoli.png").convert_alpha()
         self.image.set_colorkey(colors.BLACK)
         self.rect = self.image.get_rect()
@@ -1084,6 +1084,7 @@ class Brocoli(pg.sprite.Sprite):
         self.y = y
         self.rect.x = x * TILESIZE
         self.rect.y = y * TILESIZE
+
 
 class Cafe(pg.sprite.Sprite):
     def __init__(self, game, x, y):
@@ -1093,7 +1094,7 @@ class Cafe(pg.sprite.Sprite):
         self.type = choice(['coin'])
         self.current_frame = 0
         self.last_update = 0
-        #self.load_images()
+        # self.load_images()
         self.image = pg.image.load("img/Food/Cafe.png").convert_alpha()
         self.image.set_colorkey(colors.BLACK)
         self.rect = self.image.get_rect()
@@ -1101,6 +1102,7 @@ class Cafe(pg.sprite.Sprite):
         self.y = y
         self.rect.x = x * TILESIZE
         self.rect.y = y * TILESIZE
+
 
 class Camaron(pg.sprite.Sprite):
     def __init__(self, game, x, y):

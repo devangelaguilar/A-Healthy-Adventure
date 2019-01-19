@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # encoding: latin1
-import sys
 
 import pygame as pg
 import os
@@ -354,7 +353,7 @@ class Depression_Level:
             elif pow.type == 'door':
                 self.endlevel()
         if self.pos_y >= 1500:
-            self.endlevel()
+            self.show_go_screen()
         self.pos_x = self.player.pos.x
         self.pos_y = self.player.pos.y
         self.camera.update(self.player)
@@ -431,8 +430,7 @@ class Depression_Level:
 
 
     def show_go_screen(self):
-        #Muestra la pantalla de game over. 
-        pass
+        os.sys.exit()
     
 
     def pause(self):
@@ -448,7 +446,7 @@ class Depression_Level:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
-                    sys.exit()
+                    os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_c:
                         self.unpased()
@@ -485,7 +483,7 @@ class Depression_Level:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
-                    sys.exit()
+                    os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:
                         d_l_2 = Depression_Level_2()
@@ -692,7 +690,7 @@ class Depression_Level_2:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
-                    sys.exit()
+                    os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_c:
                         self.unpased()
@@ -739,7 +737,7 @@ class Depression_Level_2:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
-                    sys.exit()
+                    os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:
                         select_level()
@@ -768,7 +766,7 @@ class Drugs_level:
     def load_data(self):
         self.dir = os.path.dirname(__file__)
         game_folder = os.path.dirname(__file__)
-        img_folder = os.path.join(game_folder,'img')
+        img_folder = os.path.join(game_folder,'img/Drugs')
         with open(os.path.join(self.dir, HS_FILE), 'r') as f:
             try:
                 self.highscore = int(f.read())
@@ -780,7 +778,7 @@ class Drugs_level:
         self.breath_player = Spritesheet(os.path.join(img_folder,BREATH_DRUGS))
         self.walk_player = Spritesheet(os.path.join(img_folder,WALK_DRUGS))
         self.snd_dir = os.path.join(self.dir, 'snd')
-        self.background = pg.image.load("img/Fondo_Drogas.png").convert_alpha()
+        self.background = pg.image.load("img/Drugs/Fondo_Drogas.png").convert_alpha()
     
 
     def new(self):
@@ -910,7 +908,7 @@ class Drugs_level:
     def show_start_screen(self):
         screen_load = True
         if idioma == 0:
-            self.load_screen_1 = pg.image.load("img/load_screen_level_1_drogas.png").convert_alpha()
+            self.load_screen_1 = pg.image.load("img/Drugs/load_screen_level_1_drogas.png").convert_alpha()
         else:
             self.load_screen_1 = pg.image.load("img/Depression/load_screen_level_1_english.png").convert_alpha()
         while screen_load:
@@ -942,15 +940,15 @@ class Drugs_level:
         pg.mixer.music.stop()
         reloj = pg.time.Clock()
         if idioma == 0:
-            self.load_screen = pg.image.load("img/pause_menu_drugs.png").convert_alpha()
+            self.load_screen = pg.image.load("img/Drugs/pause_menu_drugs.png").convert_alpha()
         else:
-            self.load_screen = pg.image.load("img/pause_menu_drugs_english.png").convert_alpha()
+            self.load_screen = pg.image.load("img/Drugs/pause_menu_drugs_english.png").convert_alpha()
         while pause:
             self.screen.blit(self.load_screen,(0,0))
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
-                    sys.exit()
+                    os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_c:
                         self.unpased()
@@ -974,7 +972,7 @@ class Drugs_level:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
-                    sys.exit()
+                    os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:
                        select_level()
@@ -1154,15 +1152,15 @@ class Anorexia_Level:
         pg.mixer.music.stop()
         reloj = pg.time.Clock()
         if idioma == 0:
-            self.load_screen = pg.image.load("img/pause_menu_drugs.png").convert_alpha()
+            self.load_screen = pg.image.load("img/Drugs/pause_menu_drugs.png").convert_alpha()
         else:
-            self.load_screen = pg.image.load("img/pause_menu_drugs_english.png").convert_alpha()
+            self.load_screen = pg.image.load("img/Drugs/pause_menu_drugs_english.png").convert_alpha()
         while pause:
             self.screen.blit(self.load_screen,(0,0))
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
-                    sys.exit()
+                    os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_c:
                         self.unpased()
@@ -1186,7 +1184,7 @@ class Anorexia_Level:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
-                    sys.exit()
+                    os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:
                        select_level()
@@ -1713,7 +1711,7 @@ def main_screen():
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
-                    sys.exit()
+                    os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:
                         main_menu()
