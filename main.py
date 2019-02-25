@@ -910,7 +910,7 @@ class Drugs_level:
         if idioma == 0:
             self.load_screen_1 = pg.image.load("img/Drugs/load_screen_level_1_drogas.png").convert_alpha()
         else:
-            self.load_screen_1 = pg.image.load("img/Depression/load_screen_level_1_english.png").convert_alpha()
+            self.load_screen_1 = pg.image.load("img/Drugs/load_screen_level_1_drogas_english.png").convert_alpha()
         while screen_load:
             self.screen.blit(self.load_screen_1,(0,0))
             for event in pg.event.get():
