@@ -1,5 +1,5 @@
 import pygame as pg
-#Opciones
+# Opciones
 TITLE = "A Healthy Adventure"
 
 PLAYER_ACC = 0.9

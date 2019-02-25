@@ -896,7 +896,7 @@ class Drugs_level:
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
-        self.screen.blit(self.power_bar,(WIDTH / 32 * 12, 16))
+        # self.screen.blit(self.power_bar,(WIDTH / 32 * 12, 16))
         pg.display.flip()
 
     def animate_text_ly(self):
@@ -966,7 +966,7 @@ class Drugs_level:
     
     def endlevel(self):
         screen_load = True
-        self.load_screen = pg.image.load("img/drugs_screen_1.png").convert_alpha()
+        self.load_screen = pg.image.load("img/Drugs/drugs_screen_1.png").convert_alpha()
         while screen_load:
             self.screen.blit(self.load_screen,(0,0))
             for event in pg.event.get():
@@ -1385,18 +1385,19 @@ class Obesidad_Level:
         pg.quit()
         quit()
 
+
 class ETS_Level:
     def __init__(self):
-        #Inicia el juego, ventana, etc.
+        # Inicia el juego, ventana, etc.
         pg.init()
         pg.mixer.init()
         os.environ['SDL_VIDEO_CENTERED'] = '1'
-        fuente = pg.font.Font('Joystix.ttf', 20)
         pg.key.set_repeat(1, 10)
         self.clock = pg.time.Clock()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.running = True
+        self.dir = []
         self.heart = pg.image.load("img/heart.png").convert_alpha()
         self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
         self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
@@ -1419,10 +1420,9 @@ class ETS_Level:
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
         self.background = pg.image.load("img/Fondo_ETS.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
-    
 
     def new_game(self):
-        #New game.
+        # New game.
         self.score = 00
         self.lifes = 3
         self.all_sprites = pg.sprite.Group()
@@ -1457,10 +1457,9 @@ class ETS_Level:
         self.camera = Camara(self.map.width,self.map.height)
         self.run()
 
-
     def run(self):
-        #Loop Principal.
-        #pg.mixer.music.play(loops=-1)
+        # Loop Principal.
+        # pg.mixer.music.play(loops=-1)
         self.playing = True
         while self.playing:
             self.screen.fill(colors.WHITE)
@@ -1469,7 +1468,7 @@ class ETS_Level:
             self.events()
             self.draw()
             self.update()
-        #pg.mixer.music.fadeout(500)
+        # pg.mixer.music.fadeout(500)
 
     def update(self):
         #Update para el loop.
@@ -1675,6 +1674,7 @@ def exit_out():
 
 def test_level():
     pass
+
 
 def language():
     if __name__ == '__main__':
