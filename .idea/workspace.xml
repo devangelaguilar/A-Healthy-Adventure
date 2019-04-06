@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="feeeab83-abd0-4ccc-9262-8839a589081a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A Healthy Adventure (Not Final Name).pyproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A Healthy Adventure (Not Final Name).sln" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Joystix.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Roboto-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VCR_MONO.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aha_designs.xd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Depression/Scenario.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/Depression/Scenario.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/main_menu_ver_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/main_menu_ver_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/main_menu_ver_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/main_screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/main_screen.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/Depression - map_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Depression - map_1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,11 +38,43 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9016">
-              <caret line="392" column="30" selection-start-line="392" selection-start-column="30" selection-end-line="392" selection-end-column="30" />
+            <state relative-caret-position="182">
+              <caret line="1751" column="56" selection-start-line="1751" selection-start-column="56" selection-end-line="1751" selection-end-column="56" />
               <folding>
                 <element signature="e#42#61#0" expanded="true" />
+                <element signature="e#224#300#0" />
+                <element signature="e#341#437#0" />
+                <element signature="e#449#608#0" />
+                <element signature="e#628#763#0" />
+                <element signature="e#810#1681#0" />
+                <element signature="e#1702#2234#0" />
+                <element signature="e#2252#4138#0" />
+                <element signature="e#4164#6059#0" />
+                <element signature="e#6117#17095#0" />
+                <element signature="e#17369#27360#0" />
+                <element signature="e#27385#36438#0" />
+                <element signature="e#36466#44874#0" />
+                <element signature="e#44902#52052#0" />
+                <element signature="e#52076#59181#0" />
+                <element signature="e#59206#59330#0" />
+                <element signature="e#59356#60675#0" />
+                <element signature="e#60694#60799#0" />
+                <element signature="e#60827#60977#0" />
+                <element signature="e#60998#61148#0" />
+                <element signature="e#61165#61310#0" />
+                <element signature="e#62139#62683#0" />
+                <element signature="e#62704#62748#0" />
+                <element signature="e#62768#62812#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/maps/Depression - map_1.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -52,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sprites.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24978">
-              <caret line="1090" column="43" selection-start-line="1090" selection-start-column="43" selection-end-line="1090" selection-end-column="43" />
+            <state relative-caret-position="113">
+              <caret line="145" column="40" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -61,7 +91,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
+            <state relative-caret-position="-443">
               <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
             </state>
           </provider>
@@ -75,8 +105,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/sprites.py" />
         <option value="$PROJECT_DIR$/settings.py" />
+        <option value="$PROJECT_DIR$/sprites.py" />
+        <option value="$PROJECT_DIR$/maps/Depression - map_1.txt" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -91,12 +122,38 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="A-Healthy-Adventure" type="b2602c69:ProjectViewProjectNode" />
+              <item name="A-Healthy-Adventure" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="A-Healthy-Adventure" type="b2602c69:ProjectViewProjectNode" />
+              <item name="A-Healthy-Adventure" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="A-Healthy-Adventure" type="b2602c69:ProjectViewProjectNode" />
+              <item name="A-Healthy-Adventure" type="462c0819:PsiDirectoryNode" />
+              <item name="maps" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="MTCustomThemeConfigurable" />
@@ -156,11 +213,12 @@
       <workItem from="1551055339389" duration="2116000" />
       <workItem from="1553822324967" duration="609000" />
       <workItem from="1553822981299" duration="19000" />
+      <workItem from="1554522765555" duration="4317000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4497000" />
+    <option name="totallyTimeSpent" value="8814000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -202,7 +260,7 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/A_Healthy_Adventure$Main.coverage" NAME="Main Coverage Results" MODIFIED="1553822885510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/A_Healthy_Adventure$Main.coverage" NAME="Main Coverage Results" MODIFIED="1554527124303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
@@ -224,27 +282,66 @@
     <entry file="file://$PROJECT_DIR$/.idea/dictionaries/Lenovo.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9016">
-          <caret line="392" column="30" selection-start-line="392" selection-start-column="30" selection-end-line="392" selection-end-column="30" />
-          <folding>
-            <element signature="e#42#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/LICENSE.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/sprites.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24978">
-          <caret line="1090" column="43" selection-start-line="1090" selection-start-column="43" selection-end-line="1090" selection-end-column="43" />
+        <state relative-caret-position="113">
+          <caret line="145" column="40" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/maps/Depression - map_1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/main_menu_ver_3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/main_menu_ver_2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
+        <state relative-caret-position="-443">
           <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="1751" column="56" selection-start-line="1751" selection-start-column="56" selection-end-line="1751" selection-end-column="56" />
+          <folding>
+            <element signature="e#42#61#0" expanded="true" />
+            <element signature="e#224#300#0" />
+            <element signature="e#341#437#0" />
+            <element signature="e#449#608#0" />
+            <element signature="e#628#763#0" />
+            <element signature="e#810#1681#0" />
+            <element signature="e#1702#2234#0" />
+            <element signature="e#2252#4138#0" />
+            <element signature="e#4164#6059#0" />
+            <element signature="e#6117#17095#0" />
+            <element signature="e#17369#27360#0" />
+            <element signature="e#27385#36438#0" />
+            <element signature="e#36466#44874#0" />
+            <element signature="e#44902#52052#0" />
+            <element signature="e#52076#59181#0" />
+            <element signature="e#59206#59330#0" />
+            <element signature="e#59356#60675#0" />
+            <element signature="e#60694#60799#0" />
+            <element signature="e#60827#60977#0" />
+            <element signature="e#60998#61148#0" />
+            <element signature="e#61165#61310#0" />
+            <element signature="e#62139#62683#0" />
+            <element signature="e#62704#62748#0" />
+            <element signature="e#62768#62812#0" />
+          </folding>
         </state>
       </provider>
     </entry>
