@@ -2,13 +2,181 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="feeeab83-abd0-4ccc-9262-8839a589081a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/img/Depression/Scenario.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/Depression/Scenario.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Golden_Boy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Joseph_V2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Sad Boy 0%.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Sad Boy 0%_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/Santa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/depression.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/joseph_cool.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/language_menu_ver2.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/language_menu_ver2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/levels_menu.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/levels_menu.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/logo_1.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/img/main_menu_ver_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/main_menu_ver_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/main_menu_ver_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/main_menu_ver_2_esp.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/main_menu_ver_2_esp.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/img/main_screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/main_screen.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/options_menu.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/options_menu.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/playe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/player - copia.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/Depression - map_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/maps/Depression - map_1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snd/ambientmain_0.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/snd/walking.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/_pygame.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/_pygame.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/bitmask.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/bitmask.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/camera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/font.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/font.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/freetype.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/freetype.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/mask.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/mask.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/mixer.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/mixer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/pgbufferproxy.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/pgbufferproxy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/pgcompat.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/pgcompat.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/scrap.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/scrap.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/surface.h" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Include/site/python3.7/Pygame/surface.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/easy-install.pth" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/easy-install.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame-1.9.4.dist-info/INSTALLER" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame-1.9.4.dist-info/METADATA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame-1.9.4.dist-info/RECORD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame-1.9.4.dist-info/WHEEL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame-1.9.4.dist-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/LGPL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/_freetype.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/_freetype.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/base.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/base.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/bufferproxy.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/bufferproxy.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/camera.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/cdrom.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/cdrom.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/color.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/color.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/compat.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/compat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/constants.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/constants.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/cursors.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/cursors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/display.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/display.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/docs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/docs/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/draw.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/draw.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/event.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/event.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/aliens.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/aliens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/chimp.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/chimp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/glcube.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/glcube.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/mask.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/mask.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/scaletest.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/examples/scaletest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/fastevent.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/fastevent.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/font.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/font.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/freetype.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/freetype.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/ftfont.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/ftfont.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/gfxdraw.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/gfxdraw.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/gp2x/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/gp2x/constants.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/gp2x/locals.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/image.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/image.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/imageext.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/imageext.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/install.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/joystick.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/joystick.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/key.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/key.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/mask.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/mask.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/math.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/math.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/midi.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/midi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/mixer.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/mixer.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/mixer_music.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/mixer_music.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/mouse.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/mouse.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/newbuffer.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/newbuffer.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/overlay.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/overlay.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/pixelarray.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/pixelarray.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/pixelcopy.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/pixelcopy.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/pypm.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/pypm.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/readme.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/rect.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/rect.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/rwobject.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/rwobject.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/scrap.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/scrap.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/sprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/sprite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/surface.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/surface.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/surflock.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/surflock.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/sysfont.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/sysfont.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/base_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/base_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/blit_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/blit_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/bufferproxy_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/bufferproxy_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/camera_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/camera_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/cdrom_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/cdrom_tags.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/cdrom_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/cdrom_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/color_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/color_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/compat_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/compat_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/cursors_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/cursors_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/display_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/display_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/draw_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/draw_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/event_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/event_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/fastevent_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/fastevent_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/font_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/font_tags.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/font_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/font_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/freetype_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/freetype_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/ftfont_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/ftfont_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/gfxdraw_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/gfxdraw_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/image__save_gl_surface_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/image__save_gl_surface_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/image_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/image_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/imageext_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/imageext_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/joystick_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/joystick_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/key_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/key_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/mask_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/mask_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/math_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/math_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/midi_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/midi_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/mixer_music_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/mixer_music_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/mixer_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/mixer_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/mouse_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/mouse_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/overlay_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/overlay_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/pixelarray_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/pixelarray_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/pixelcopy_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/pixelcopy_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/rect_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/rect_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_3_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_3_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_4_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_4_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_5_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_5_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_6_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/all_ok/fake_6_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/everything/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/everything/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/everything/incomplete_todo_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/everything/incomplete_todo_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/everything/magic_tag_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/everything/magic_tag_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/everything/sleep_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/everything/sleep_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/exclude/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/exclude/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/exclude/invisible_tag_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/exclude/invisible_tag_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/exclude/magic_tag_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/exclude/magic_tag_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/failures1/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/failures1/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/failures1/fake_3_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/failures1/fake_3_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/failures1/fake_4_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/failures1/fake_4_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/incomplete/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/incomplete/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/incomplete/fake_3_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/incomplete/fake_3_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/incomplete_todo/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/incomplete_todo/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/incomplete_todo/fake_3_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/incomplete_todo/fake_3_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/infinite_loop/fake_1_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/infinite_loop/fake_1_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/infinite_loop/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/infinite_loop/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stderr/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stderr/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stderr/fake_3_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stderr/fake_3_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stderr/fake_4_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stderr/fake_4_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stdout/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stdout/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stdout/fake_3_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stdout/fake_3_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stdout/fake_4_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/print_stdout/fake_4_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/timeout/fake_2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/timeout/fake_2_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/timeout/sleep_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/run_tests__tests/timeout/sleep_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/rwobject_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/rwobject_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/scrap_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/scrap_tags.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/scrap_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/scrap_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/sndarray_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/sndarray_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/sprite_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/sprite_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/surface_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/surface_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/surfarray_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/surfarray_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/surflock_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/surflock_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/sysfont_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/sysfont_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/arrinter.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/arrinter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/async_sub.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/async_sub.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/png.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/png.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/run_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/run_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/test_machinery.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/test_machinery.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/test_runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/test_utils/test_runner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/threads_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/threads_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/time_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/time_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/transform_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/tests/transform_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/time.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/time.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/transform.cp37-win32.pyd" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/transform.cp37-win32.pyd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/version.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pygame/version.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/pip-selfcheck.json" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pip-selfcheck.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,33 +206,36 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="1751" column="56" selection-start-line="1751" selection-start-column="56" selection-end-line="1751" selection-end-column="56" />
+            <state relative-caret-position="222">
+              <caret line="396" column="132" selection-start-line="396" selection-start-column="132" selection-end-line="396" selection-end-column="132" />
               <folding>
                 <element signature="e#42#61#0" expanded="true" />
-                <element signature="e#224#300#0" />
-                <element signature="e#341#437#0" />
-                <element signature="e#449#608#0" />
-                <element signature="e#628#763#0" />
-                <element signature="e#810#1681#0" />
-                <element signature="e#1702#2234#0" />
-                <element signature="e#2252#4138#0" />
-                <element signature="e#4164#6059#0" />
-                <element signature="e#6117#17095#0" />
-                <element signature="e#17369#27360#0" />
-                <element signature="e#27385#36438#0" />
-                <element signature="e#36466#44874#0" />
-                <element signature="e#44902#52052#0" />
-                <element signature="e#52076#59181#0" />
-                <element signature="e#59206#59330#0" />
-                <element signature="e#59356#60675#0" />
-                <element signature="e#60694#60799#0" />
-                <element signature="e#60827#60977#0" />
-                <element signature="e#60998#61148#0" />
-                <element signature="e#61165#61310#0" />
-                <element signature="e#62139#62683#0" />
-                <element signature="e#62704#62748#0" />
-                <element signature="e#62768#62812#0" />
+                <element signature="e#224#324#0" />
+                <element signature="e#365#461#0" />
+                <element signature="e#473#632#0" />
+                <element signature="e#651#786#0" />
+                <element signature="e#834#1705#0" />
+                <element signature="e#1727#2259#0" />
+                <element signature="e#2278#4164#0" />
+                <element signature="e#4191#6086#0" />
+                <element signature="e#17128#27155#0" />
+                <element signature="e#27181#36258#0" />
+                <element signature="e#36287#44695#0" />
+                <element signature="e#44724#51874#0" />
+                <element signature="e#51898#59003#0" />
+                <element signature="e#59028#59152#0" />
+                <element signature="e#59184#60503#0" />
+                <element signature="e#60518#60623#0" />
+                <element signature="e#60652#60802#0" />
+                <element signature="e#60824#60974#0" />
+                <element signature="e#60992#61137#0" />
+                <element signature="e#61263#61918#0" />
+                <element signature="e#61948#62492#0" />
+                <element signature="e#62651#63154#0" />
+                <element signature="e#63179#63223#0" />
+                <element signature="e#62579#62623#0" />
+                <element signature="e#62647#63862#0" />
+                <element signature="e#63883#64742#0" />
               </folding>
             </state>
           </provider>
@@ -82,7 +253,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sprites.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
+            <state relative-caret-position="3243">
               <caret line="145" column="40" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
             </state>
           </provider>
@@ -91,7 +262,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-443">
+            <state relative-caret-position="161">
               <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
             </state>
           </provider>
@@ -156,7 +327,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="MTCustomThemeConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -214,11 +385,12 @@
       <workItem from="1553822324967" duration="609000" />
       <workItem from="1553822981299" duration="19000" />
       <workItem from="1554522765555" duration="4317000" />
+      <workItem from="1554590999517" duration="7247000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8814000" />
+    <option name="totallyTimeSpent" value="16061000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -238,7 +410,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3277311" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.3277311" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39831933" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -246,8 +418,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3277311" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" weight="0.32941177" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49924356" weight="0.32941177" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -260,7 +432,7 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/A_Healthy_Adventure$Main.coverage" NAME="Main Coverage Results" MODIFIED="1554527124303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/A_Healthy_Adventure$Main.coverage" NAME="Main Coverage Results" MODIFIED="1554600176278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
@@ -285,10 +457,43 @@
     <entry file="file://$PROJECT_DIR$/LICENSE.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/sprites.py">
+    <entry file="file://$PROJECT_DIR$/img/main_menu_ver_3.png" />
+    <entry file="file://$PROJECT_DIR$/img/main_menu_ver_2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="145" column="40" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
+        <state relative-caret-position="222">
+          <caret line="396" column="132" selection-start-line="396" selection-start-column="132" selection-end-line="396" selection-end-column="132" />
+          <folding>
+            <element signature="e#42#61#0" expanded="true" />
+            <element signature="e#224#324#0" />
+            <element signature="e#365#461#0" />
+            <element signature="e#473#632#0" />
+            <element signature="e#651#786#0" />
+            <element signature="e#834#1705#0" />
+            <element signature="e#1727#2259#0" />
+            <element signature="e#2278#4164#0" />
+            <element signature="e#4191#6086#0" />
+            <element signature="e#17128#27155#0" />
+            <element signature="e#27181#36258#0" />
+            <element signature="e#36287#44695#0" />
+            <element signature="e#44724#51874#0" />
+            <element signature="e#51898#59003#0" />
+            <element signature="e#59028#59152#0" />
+            <element signature="e#59184#60503#0" />
+            <element signature="e#60518#60623#0" />
+            <element signature="e#60652#60802#0" />
+            <element signature="e#60824#60974#0" />
+            <element signature="e#60992#61137#0" />
+            <element signature="e#61263#61918#0" />
+            <element signature="e#61948#62492#0" />
+            <element signature="e#62651#63154#0" />
+            <element signature="e#63179#63223#0" />
+            <element signature="e#62579#62623#0" />
+            <element signature="e#62647#63862#0" />
+            <element signature="e#63883#64742#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -299,49 +504,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/img/main_menu_ver_3.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img/main_menu_ver_2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.py">
+    <entry file="file://$PROJECT_DIR$/sprites.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-443">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+        <state relative-caret-position="3243">
+          <caret line="145" column="40" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="1751" column="56" selection-start-line="1751" selection-start-column="56" selection-end-line="1751" selection-end-column="56" />
-          <folding>
-            <element signature="e#42#61#0" expanded="true" />
-            <element signature="e#224#300#0" />
-            <element signature="e#341#437#0" />
-            <element signature="e#449#608#0" />
-            <element signature="e#628#763#0" />
-            <element signature="e#810#1681#0" />
-            <element signature="e#1702#2234#0" />
-            <element signature="e#2252#4138#0" />
-            <element signature="e#4164#6059#0" />
-            <element signature="e#6117#17095#0" />
-            <element signature="e#17369#27360#0" />
-            <element signature="e#27385#36438#0" />
-            <element signature="e#36466#44874#0" />
-            <element signature="e#44902#52052#0" />
-            <element signature="e#52076#59181#0" />
-            <element signature="e#59206#59330#0" />
-            <element signature="e#59356#60675#0" />
-            <element signature="e#60694#60799#0" />
-            <element signature="e#60827#60977#0" />
-            <element signature="e#60998#61148#0" />
-            <element signature="e#61165#61310#0" />
-            <element signature="e#62139#62683#0" />
-            <element signature="e#62704#62748#0" />
-            <element signature="e#62768#62812#0" />
-          </folding>
+        <state relative-caret-position="161">
+          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
         </state>
       </provider>
     </entry>

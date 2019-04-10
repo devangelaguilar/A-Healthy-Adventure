@@ -236,6 +236,7 @@ class Depression_Level:
         self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
         self.lm = pg.image.load("img/heart_ly.png").convert_alpha()
         self.font_name = pg.font.match_font(FONT_NAME)
+        self.pos_song = 0
         self.load_data_depression()
 
     def load_data_depression(self):
@@ -257,6 +258,7 @@ class Depression_Level:
         self.background = pg.image.load("img/Depression/Scenario.png").convert_alpha()
         self.top_bar = pg.image.load("img/Depression/top_bar.png").convert_alpha()
         self.jos = pg.image.load("img/Depression/Joseph.png").convert_alpha()
+        self.lyt = pg.image.load("img/lyt.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -360,6 +362,7 @@ class Depression_Level:
             self.show_go_screen()
         self.pos_x = self.player.pos.x
         self.pos_y = self.player.pos.y
+        self.pos_song = pg.mixer_music.get_pos()
         self.camera.update(self.player)
 
     def events(self):
@@ -380,7 +383,7 @@ class Depression_Level:
         #Dibujar pantalla durante el loop.
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
-        self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
+        self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))
         self.draw_text('fonts/Joystix.ttf', '= ' + str(self.score), 14, colors.WHITE, WIDTH / 32 * 27, 22)
         if idioma == 0:
             self.draw_text('fonts/Joystix.ttf', 'Depresion: 100%', 14, colors.WHITE, WIDTH / 32 * 25, 62)
@@ -391,6 +394,8 @@ class Depression_Level:
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
+        self.draw_text('fonts/Roboto-Light.ttf', 'BTS - The Truth Untold (feat. Steve Aoki)', 12, colors.WHITE, WIDTH / 32 * 26, 605)
+        self.screen.blit(self.lyt, (WIDTH / 32 * 30, 590))
         """self.draw_text('fonts/Roboto-Light.ttf', str(self.pos_x), 12, colors.WHITE, WIDTH / 32 * 16, 240)
         self.draw_text('fonts/Roboto-Light.ttf', str(self.pos_y), 12, colors.WHITE, WIDTH / 32 * 16, 260)"""
         pg.display.flip()
@@ -436,6 +441,7 @@ class Depression_Level:
     
 
     def pause(self):
+        pg.mixer_music.pause()
         reloj = pg.time.Clock()
         if idioma == 0:
             self.load_screen = pg.image.load("img/Depression/pause_menu.png").convert_alpha()
@@ -458,6 +464,7 @@ class Depression_Level:
             reloj.tick(FPS)
     
     def unpased(self):
+        pg.mixer_music.unpause()
         global pause
         pause = False
 
@@ -747,7 +754,7 @@ class Drugs_level:
         pg.init()
         pg.mixer.init()
         os.environ['SDL_VIDEO_CENTERED'] = '1'
-        fuente = pg.font.Font('Joystix.ttf', 20)
+        fuente = pg.font.Font('fonts/Joystix.ttf', 20)
         pg.key.set_repeat(1, 10)
         self.clock = pg.time.Clock()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -886,11 +893,11 @@ class Drugs_level:
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.img_score,(WIDTH / 32 * 24, 0))    
-        self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
+        self.draw_text('fonts/Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
         if idioma == 0:
-            self.draw_text('Joystix.ttf', 'Drogas - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+            self.draw_text('fonts/Joystix.ttf', 'Drogas - Nivel 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         else:
-            self.draw_text('Joystix.ttf', 'Drugs - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+            self.draw_text('fonts/Joystix.ttf', 'Drugs - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -1723,6 +1730,23 @@ def main_screen():
             pg.display.update()
 
 
+def about():
+    screen = pg.display.set_mode((WIDTH, HEIGHT))
+    about_screen = True
+    screen_about = pg.image.load("img/about_screen.png")
+    while about_screen:
+        screen.blit(screen_about, (0, 0))
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                os.sys.exit()
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_RETURN:
+                    main_menu()
+                    pg.quit()
+            pg.display.update()
+
+
 def espanol():
     global idioma
     idioma = 0
@@ -1744,13 +1768,13 @@ def main_menu():
             fondo = pg.image.load("img/main_menu_ver_2_esp.png").convert()
             opciones = [  (opciones_espanol[0], select_level),
                             (opciones_espanol[1], options),
-                            (opciones_espanol[2], creditos),
+                            (opciones_espanol[2], about),
                             (opciones_espanol[3], exit_out)]
         if idioma == 1:
             fondo = pg.image.load("img/main_menu_ver_2.png").convert()
             opciones = [  (opciones_ingles[0], select_level),
                             (opciones_ingles[1], options),
-                            (opciones_ingles[2], creditos),
+                            (opciones_ingles[2], about),
                             (opciones_ingles[3], exit_out)]
 
     pg.font.init()
