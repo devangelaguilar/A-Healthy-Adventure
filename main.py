@@ -362,7 +362,6 @@ class Depression_Level:
             self.show_go_screen()
         self.pos_x = self.player.pos.x
         self.pos_y = self.player.pos.y
-        self.pos_song = pg.mixer_music.get_pos()
         self.camera.update(self.player)
 
     def events(self):
@@ -491,11 +490,12 @@ class Depression_Level:
                     os.sys.exit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:
-                        d_l_2 = Depression_Level_2()
+                        """d_l_2 = Depression_Level_2()
                         d_l_2.show_start_screen()
                         while d_l_2.running:
                             d_l_2.new_game()
-                            d_l_2.show_go_screen()
+                            d_l_2.show_go_screen()"""
+                        select_level()
 
                         pg.quit()
             pg.display.update()
@@ -1214,7 +1214,7 @@ class Obesidad_Level:
         pg.init()
         pg.mixer.init()
         os.environ['SDL_VIDEO_CENTERED'] = '1'
-        fuente = pg.font.Font('Joystix.ttf', 20)
+        fuente = pg.font.Font('fonts/Joystix.ttf', 20)
         pg.key.set_repeat(1, 10)
         self.clock = pg.time.Clock()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -1230,7 +1230,7 @@ class Obesidad_Level:
     def load_data_depression(self):
         self.dir = os.path.dirname(__file__)
         game_folder = os.path.dirname(__file__)
-        img_folder = os.path.join(game_folder,'img')
+        img_folder = os.path.join(game_folder,'img/Obesity')
         with open(os.path.join(self.dir, HS_FILE), 'r') as f:
             try:
                 self.highscore = int(f.read())
@@ -1240,7 +1240,7 @@ class Obesidad_Level:
         self.spritesheet_don_juan = Spritesheet(os.path.join(img_folder,JUAN_SPRITESHEET))
         #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/Fondo_Obesidad.png").convert_alpha()
+        self.background = pg.image.load("img/Obesity/Fondo_Obesidad.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -1277,6 +1277,8 @@ class Obesidad_Level:
                     Door(self,col,row)
         pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
         pg.mixer.music.set_volume(1);
+        self.pos_x = 0
+        self.pos_y = 0
         self.camera = Camara(self.map.width,self.map.height)
         self.run()
 
@@ -1340,8 +1342,11 @@ class Obesidad_Level:
                 elif self.lifes == 3:
                     self.heart_3 = pg.image.load("img/heart.png")
             elif pow.type == 'door':
-                self.quitgame()
-        self.animate_text_ly()
+                self.endlevel()
+        if self.pos_y >= 1500:
+            self.show_go_screen()
+        self.pos_x = self.player.pos.x
+        self.pos_y = self.player.pos.y
         self.camera.update(self.player)
 
     def events(self):
@@ -1352,16 +1357,19 @@ class Obesidad_Level:
                     self.playing = False
                 self.running = False
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE:
-                   self.quitgame()
+                if event.key == pg.K_p or event.key == pg.K_ESCAPE:
+                    global pause
+                    pause = True
+                    self.pause()
+
 
     def draw(self):
         #Dibujar pantalla durante el loop.
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
-        self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'Obesidad - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        self.draw_text('fonts/Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
+        self.draw_text('fonts/Joystix.ttf', 'Obesidad - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -1380,6 +1388,34 @@ class Obesidad_Level:
     def show_go_screen(self):
         #Muestra la pantalla de game over. 
         pass
+    
+    def pause(self):
+        pg.mixer_music.pause()
+        reloj = pg.time.Clock()
+        if idioma == 0:
+            self.load_screen = pg.image.load("img/Depression/pause_menu.png").convert_alpha()
+        else:
+            self.load_screen = pg.image.load("img/Depression/pause_menu_english.png").convert_alpha()
+        while pause:
+            self.screen.blit(self.load_screen,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    os.sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_c:
+                        self.unpased()
+                    if event.key == pg.K_s:
+                        select_level()
+                    if event.key == pg.K_q:
+                        self.quitgame()
+            pg.display.update()
+            reloj.tick(FPS)
+    
+    def unpased(self):
+        pg.mixer_music.unpause()
+        global pause
+        pause = False
 
     def draw_text(self, font_name,text, size, color, x, y):
         font = pg.font.Font(font_name, size)
@@ -1391,6 +1427,28 @@ class Obesidad_Level:
     def quitgame(self):
         pg.quit()
         quit()
+
+    def endlevel(self):
+        pg.mixer.music.stop()
+        screen_load = True
+        self.load_screen = pg.image.load("img/Depression/depresion_screen_1.png")
+        while screen_load:
+            self.screen.blit(self.load_screen,(0,0))
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    os.sys.exit()
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_RETURN:
+                        """d_l_2 = Depression_Level_2()
+                        d_l_2.show_start_screen()
+                        while d_l_2.running:
+                            d_l_2.new_game()
+                            d_l_2.show_go_screen()"""
+                        select_level()
+
+                        pg.quit()
+            pg.display.update()
 
 
 class ETS_Level:
@@ -1415,7 +1473,7 @@ class ETS_Level:
     def load_data_depression(self):
         self.dir = os.path.dirname(__file__)
         game_folder = os.path.dirname(__file__)
-        img_folder = os.path.join(game_folder,'img')
+        img_folder = os.path.join(game_folder,'img/STD')
         with open(os.path.join(self.dir, HS_FILE), 'r') as f:
             try:
                 self.highscore = int(f.read())
@@ -1425,7 +1483,7 @@ class ETS_Level:
         self.spritesheet_macho = Spritesheet(os.path.join(img_folder,MACHO_SPRITESHEET))
         #self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         #self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
-        self.background = pg.image.load("img/Fondo_ETS.png").convert_alpha()
+        self.background = pg.image.load("img/STD/Fondo_ETS.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
 
     def new_game(self):
@@ -1543,8 +1601,8 @@ class ETS_Level:
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image,self.camera.apply(sprite))
         self.screen.blit(self.lm,(WIDTH / 32 * 24, 0))    
-        self.draw_text('Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
-        self.draw_text('Joystix.ttf', 'ETS - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
+        self.draw_text('fonts/Joystix.ttf', '= ' + str(self.score), 18, colors.WHITE, WIDTH / 32 * 27, 22)
+        self.draw_text('fonts/Joystix.ttf', 'ETS - Level 1', 12, colors.WHITE, WIDTH / 32 * 16, 0)
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
@@ -1576,6 +1634,7 @@ class ETS_Level:
         quit()
 
 
+
 def depression():
     d_l = Depression_Level()
         
@@ -1597,15 +1656,15 @@ def select_level():
             opcion = [(niveles[0], depression),
                         (niveles[1], drugs),
                         (niveles[2], food_disorders),
-                        (niveles[3], test_level),
-                        (niveles[4],test_level),
+                        (niveles[3], obesity),
+                        (niveles[4],ets),
                         (niveles[5],main_menu)]
         if idioma == 1:
             opcion = [(niveles_ingles[0], depression),
                         (niveles_ingles[1], drugs),
                         (niveles_ingles[2], food_disorders),
-                        (niveles_ingles[3], test_level),
-                        (niveles_ingles[4],test_level),
+                        (niveles_ingles[3], obesity),
+                        (niveles_ingles[4],ets),
                         (niveles_ingles[5],main_menu)]
 
     pg.font.init()
