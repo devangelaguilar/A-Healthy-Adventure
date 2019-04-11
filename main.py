@@ -225,8 +225,6 @@ class Depression_Level:
         pg.init()
         pg.mixer.init()
         os.environ['SDL_VIDEO_CENTERED'] = '1'
-        fuente = pg.font.Font('fonts/Joystix.ttf', 20)
-        pg.key.set_repeat(1, 10)
         self.clock = pg.time.Clock()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
@@ -258,7 +256,7 @@ class Depression_Level:
         self.background = pg.image.load("img/Depression/Scenario.png").convert_alpha()
         self.top_bar = pg.image.load("img/Depression/top_bar.png").convert_alpha()
         self.jos = pg.image.load("img/Depression/Joseph.png").convert_alpha()
-        self.lyt = pg.image.load("img/lyt.png").convert_alpha()
+        self.hfk = pg.image.load("img/hfk.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -298,7 +296,7 @@ class Depression_Level:
                     Door(self,col,row)
                 if tile == 'M':
                     self.minion = Minion_Depression(self,col,row)
-        pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
+        pg.mixer.music.load(os.path.join(self.snd_dir, 'Sorry.mp3'))
         pg.mixer.music.set_volume(self.volumen)
         self.camera = Camara(self.map.width,self.map.height)
         self.pos_x = 0
@@ -393,8 +391,8 @@ class Depression_Level:
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
-        self.draw_text('fonts/Roboto-Light.ttf', 'BTS - The Truth Untold (feat. Steve Aoki)', 12, colors.WHITE, WIDTH / 32 * 26, 605)
-        self.screen.blit(self.lyt, (WIDTH / 32 * 30, 590))
+        self.draw_text('fonts/Roboto-Light.ttf', 'Halsey - Sorry', 12, colors.WHITE, WIDTH / 32 * 28, 605)
+        self.screen.blit(self.hfk, (WIDTH / 32 * 30, 590))
         """self.draw_text('fonts/Roboto-Light.ttf', str(self.pos_x), 12, colors.WHITE, WIDTH / 32 * 16, 240)
         self.draw_text('fonts/Roboto-Light.ttf', str(self.pos_y), 12, colors.WHITE, WIDTH / 32 * 16, 260)"""
         pg.display.flip()
@@ -534,6 +532,7 @@ class Depression_Level_2:
         self.heart_anim = Spritesheet(os.path.join(img_folder,HEART_ANIM))
         self.heart_ly_anim = Spritesheet(os.path.join(img_folder,HEART_LY_ANIM))
         self.background = pg.image.load("img/Depression/Scenario.png").convert_alpha()
+        self.lyt = pg.image.load("img/lyt.png").convert_alpha()
         self.snd_dir = os.path.join(self.dir, 'snd')
     
 
@@ -568,7 +567,7 @@ class Depression_Level_2:
                     self.player = Joseph(self, col, row)
                 if tile == 'D':
                     Door(self,col,row)
-        pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat. Steve Aoki).mp3'))
+        pg.mixer.music.load(os.path.join(self.snd_dir, 'The Truth Untold (feat Steve Aoki).mp3'))
         pg.mixer.music.set_volume(1);
         self.camera = Camara(self.map.width,self.map.height)
         self.run_depression()
@@ -664,6 +663,8 @@ class Depression_Level_2:
         self.screen.blit(self.heart,(WIDTH / 32 * 13, 2))
         self.screen.blit(self.heart_2,(WIDTH / 32 * 15, 2))
         self.screen.blit(self.heart_3,(WIDTH / 32 * 17, 2))
+        self.draw_text('fonts/Roboto-Light.ttf', 'BTS - The Truth Untold (feat. Steve Aoki)', 12, colors.WHITE, WIDTH / 32 * 26, 605)
+        self.screen.blit(self.lyt, (WIDTH / 32 * 30, 590))
         pg.display.flip()
 
     def update_lifes(self):
@@ -1208,14 +1209,12 @@ class Anorexia_Level:
         quit()
 
 
-class Obesidad_Level:
+class ObesidadLevel:
     def __init__(self):
-        #Inicia el juego, ventana, etc.
+        # Inicia el juego, ventana, etc.
         pg.init()
         pg.mixer.init()
         os.environ['SDL_VIDEO_CENTERED'] = '1'
-        fuente = pg.font.Font('fonts/Joystix.ttf', 20)
-        pg.key.set_repeat(1, 10)
         self.clock = pg.time.Clock()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
@@ -1451,18 +1450,18 @@ class Obesidad_Level:
             pg.display.update()
 
 
-class ETS_Level:
+class ETSLevel:
     def __init__(self):
         # Inicia el juego, ventana, etc.
         pg.init()
         pg.mixer.init()
         os.environ['SDL_VIDEO_CENTERED'] = '1'
-        pg.key.set_repeat(1, 10)
         self.clock = pg.time.Clock()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.running = True
         self.dir = []
+        self.score = 0
         self.heart = pg.image.load("img/heart.png").convert_alpha()
         self.heart_2 = pg.image.load("img/heart.png").convert_alpha()
         self.heart_3 = pg.image.load("img/heart.png").convert_alpha()
@@ -1488,7 +1487,7 @@ class ETS_Level:
 
     def new_game(self):
         # New game.
-        self.score = 00
+        self.score = 0
         self.lifes = 3
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()

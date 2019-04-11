@@ -1,5 +1,9 @@
 WHITE = (255,255,255)
 BLACK = (0,0,0)
+ARTICHOKE = (144,149,128)
+ELECTRIC_BLUE = (126,232,250)
+RUBY_RED = (147,22,33)
+COOL_GREEN = (84, 151, 113)
 
 class Material:
     #Paleta de Material Colors 
@@ -27,9 +31,3 @@ class Material:
     GREEN300 = (129, 199, 132)
     GREY900 = (33,33,33)
     BLUE_GREY300 = (144,164,174)
-
-#Colores extra(Innecesarios a decir verdad)
-ARTICHOKE = (144,149,128)
-ELECTRIC_BLUE = (126,232,250)
-RUBY_RED = (147,22,33)
-COOL_GREEN = (84, 151, 113 )
