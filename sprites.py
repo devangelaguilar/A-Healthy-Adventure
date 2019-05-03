@@ -54,10 +54,10 @@ class Joseph(pg.sprite.Sprite):
         self.rot = 0
 
     def load_images(self):
-        self.standing_frames = [self.game.spritesheet.get_image(0,0,64,64),
-                        self.game.spritesheet.get_image(64,0,64,64),
-                        self.game.spritesheet.get_image(128,0,64,64),
-                        self.game.spritesheet.get_image(192,0,64,64)]
+        self.standing_frames = [self.game.spritesheet.get_image(0, 0, 256, 256),
+                        self.game.spritesheet.get_image(256, 0, 256, 256),
+                        self.game.spritesheet.get_image(512, 0, 256, 256),
+                        self.game.spritesheet.get_image(1024, 0, 256, 256)]
         for frame in self.standing_frames:
             frame.set_colorkey(colors.BLACK)
 

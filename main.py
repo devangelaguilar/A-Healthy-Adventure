@@ -221,12 +221,12 @@ class Menu_Niveles:
 
 class Depression_Level:
     def __init__(self):
-        #Inicia el juego, ventana, etc.
+        # Inicia el juego, ventana, etc.
         pg.init()
         pg.mixer.init()
         os.environ['SDL_VIDEO_CENTERED'] = '1'
         self.clock = pg.time.Clock()
-        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pg.display.set_mode((WIDTH, HEIGHT), pg.FULLSCREEN)
         pg.display.set_caption(TITLE)
         self.running = True
         self.heart = pg.image.load("img/heart.png").convert_alpha()
@@ -356,8 +356,8 @@ class Depression_Level:
                 self.update_lifes()
             elif pow.type == 'door':
                 self.endlevel()
-        if self.pos_y >= 1500:
-            self.show_go_screen()
+        # if self.pos_y >= 1500:
+            # self.show_go_screen()
         self.pos_x = self.player.pos.x
         self.pos_y = self.player.pos.y
         self.camera.update(self.player)
@@ -1633,7 +1633,6 @@ class ETSLevel:
         quit()
 
 
-
 def depression():
     d_l = Depression_Level()
         
@@ -1710,7 +1709,7 @@ def food_disorders():
 
 
 def obesity():
-    o_l = Obesidad_Level()
+    o_l = ObesidadLevel()
     o_l.show_start_screen()
         
     while o_l.running:
@@ -1737,8 +1736,7 @@ def creditos():
     pass
 
 def exit_out():
-    import sys
-    sys.exit(0)
+    os.sys.exit(0)
 
 def test_level():
     pass
@@ -1772,24 +1770,24 @@ def language():
 
 
 def main_screen():
-        screen = pg.display.set_mode((WIDTH, HEIGHT))
-        main_screen = True
-        screen_main = pg.image.load("img/main_screen.png")
-        while main_screen:
-            screen.blit(screen_main,(0,0))
-            for event in pg.event.get():
-                if event.type == pg.QUIT:
+    screen = pg.display.set_mode((WIDTH, HEIGHT), pg.FULLSCREEN)
+    main_screen = True
+    screen_main = pg.image.load("img/main_screen.png")
+    while main_screen:
+        screen.blit(screen_main,(0,0))
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                os.sys.exit()
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_RETURN:
+                    main_menu()
                     pg.quit()
-                    os.sys.exit()
-                if event.type == pg.KEYDOWN:
-                    if event.key == pg.K_RETURN:
-                        main_menu()
-                        pg.quit()
-            pg.display.update()
+        pg.display.update()
 
 
 def about():
-    screen = pg.display.set_mode((WIDTH, HEIGHT))
+    screen = pg.display.set_mode((WIDTH, HEIGHT), pg.FULLSCREEN)
     about_screen = True
     screen_about = pg.image.load("img/about_screen.png")
     while about_screen:
@@ -1820,8 +1818,8 @@ def ingles():
 def main_menu():
     if __name__ == '__main__':
         salir = False
-        opciones = [('Test',Drugs_level),
-                    ('Hi',Depression_Level)]
+        opciones = [('Test',None),
+                    ('Hi',None)]
         if idioma == 0:
             fondo = pg.image.load("img/main_menu_ver_2_esp.png").convert()
             opciones = [  (opciones_espanol[0], select_level),
@@ -1836,7 +1834,7 @@ def main_menu():
                             (opciones_ingles[3], exit_out)]
 
     pg.font.init()
-    screen = pg.display.set_mode((WIDTH, HEIGHT))
+    screen = pg.display.set_mode((WIDTH, HEIGHT), pg.FULLSCREEN)
     menu = Menu(opciones,colors.WHITE)
 
     while not salir:
