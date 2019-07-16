@@ -1,4 +1,4 @@
-#!C:\Users\Lenovo\Documents\GitHub\A-Healthy-Adventure\venv\Scripts\python.exe
+#!C:\Users\Lenovo\PycharmProjects\untitled\venv\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'pip==10.0.1','console_scripts','pip'
 __requires__ = 'pip==10.0.1'
 import re
