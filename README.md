@@ -21,7 +21,7 @@
 
 ## Credits
 
-L
+[<img src="https://avatars0.githubusercontent.com/u/25912819?s=460&v=4" width="100px;"/><br /><sub><b>Ángel Aguilar</b></sub>](http://angelaguilar.me)<br/>   
 M
 S
 B
