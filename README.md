@@ -1,14 +1,9 @@
-# A Healthy Adventure
+# A Healthy Adventure. :video_game:
 
-## Historial de versiones
+- Ángel Aguilar "Team Leader"
+- Bernardo Suarez "Design Leader"
+- Luis Fernando Martinez "Programming Leader"
+- Guillermo Villegas "Documentation Leader"
+- Sergio Adrian "Testing Leader"
 
-* 0.0.1
-    * Trabajo en progreso de la nueva version.
-
-## Creditos
-
-**Autor:** Ángel Aguilar\
-**Email Universitario:** mgordillo0@ucol.mx\
-**Email Personal:** devangelaguilar@gmail.com\
-**Website:** angelaguilar16.github.io\
-Copyright Ángel Aguilar 2019
+## by Milledo Dogio
