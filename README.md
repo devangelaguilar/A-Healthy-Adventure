@@ -29,7 +29,7 @@ Bernardo <br/>
 
 ## License
 
-MIT
+GNU General Public License v3.0
 
 <p align="center">
     <img src="https://www.dl.dropboxusercontent.com/s/v3yzqgly07qke1m/Logo_AA_C2_WB.png?dl=0" width="100px">
