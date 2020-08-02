@@ -131,10 +131,10 @@ class Menu:
             elif k[K_DOWN]:
                 self.seleccionado += 1
             elif k[K_RETURN]:
-                # Invoca a la función asociada a la opción.
+                # Invoca a la funcion asociada a la opcion
                 self.opciones[self.seleccionado].activar()
 
-        # procura que el cursor esté entre las opciones permitidas
+        # procura que el cursor est entre las opciones permitidas
         if self.seleccionado < 0:
             self.seleccionado = 0
         elif self.seleccionado > self.total - 1:
@@ -151,7 +151,7 @@ class Menu:
             o.actualizar()
 
     def imprimir(self, screen):
-        """Imprime sobre 'screen' el texto de cada opción del menú."""
+        """Imprime sobre 'screen' el texto de cada opcion del menu."""
 
         self.cursor.imprimir(screen)
 
@@ -196,10 +196,10 @@ class Menu_Niveles:
             elif k[K_DOWN]:
                 self.seleccionado += 1
             elif k[K_RETURN]:
-                # Invoca a la función asociada a la opción.
+                # Invoca a la funcion asociada a la opciin.
                 self.opciones[self.seleccionado].activar()
 
-        # procura que el cursor esté entre las opciones permitidas
+        # procura que el cursor este entre las opciones permitidas
         if self.seleccionado < 0:
             self.seleccionado = 0
         elif self.seleccionado > self.total - 1:
@@ -216,7 +216,7 @@ class Menu_Niveles:
             o.actualizar()
 
     def imprimir(self, screen):
-        """Imprime sobre 'screen' el texto de cada opción del menú."""
+        """Imprime sobre 'screen' el texto de cada opcion del menu."""
 
         self.cursor.imprimir(screen)
 
