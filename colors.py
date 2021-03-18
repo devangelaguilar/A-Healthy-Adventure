@@ -28,7 +28,7 @@ class Material:
     GREY900 = (33,33,33)
     BLUE_GREY300 = (144,164,174)
 
-#Colores extra(Innecesarios a decir verdad)
+#Colores extra(Innecesarios a decir verdad, pero me gustaron.)
 ARTICHOKE = (144,149,128)
 ELECTRIC_BLUE = (126,232,250)
 RUBY_RED = (147,22,33)
